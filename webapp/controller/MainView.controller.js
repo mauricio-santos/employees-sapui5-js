@@ -11,32 +11,15 @@ sap.ui.define([
 
         function onInit() {
             const oView = this.getView();
-            const i18nBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             const oJSONModel = new JSONModel();
 
-            const oModel = {
-                employeeId: "12345",
-                countryKey: "BR",
-                listCountry: [
-                    {
-                        key: "US",
-                        text: i18nBundle.getText("countryUS")
-                    },
-                    {
-                        key: "BR",
-                        text: i18nBundle.getText("countryBR")
-                    },
-                    {
-                        key: "ES",
-                        text: i18nBundle.getText("countryES")
-                    },
-                    {
-                        key: "PT",
-                        text: i18nBundle.getText("countryPT")
-                    },
-                ]
-            }
-            oJSONModel.setData(oModel);
+            oJSONModel.loadData("./localService/mockdata/Employees.json");
+
+            //Chamada assíncrona. Função é Executada quando o modelo é carrregado
+            oJSONModel.attachRequestCompleted(function(oEventModel) {
+                console.log(JSON.stringify(oJSONModel.getData()));
+            })
+
             oView.setModel(oJSONModel);
         }
 
