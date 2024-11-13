@@ -9,11 +9,40 @@ sap.ui.define([
     function (Controller, JSONModel) {
         "use strict";
 
-        const Main = Controller.extend("logaligroup.employees.controller.MainView", {});
+        function onInit() {
+            const oView = this.getView();
+            const i18nBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+            const oJSONModel = new JSONModel();
 
-        Main.prototype.onInit = function() {
-            
+            const oModel = {
+                employeeId: "13456",
+                countryKey: "BR",
+                listCountry: [
+                    {
+                        key: "US",
+                        text: i18nBundle.getText("countryUS")
+                    },
+                    {
+                        key: "BR",
+                        text: i18nBundle.getText("countryBR")
+                    },
+                    {
+                        key: "ES",
+                        text: i18nBundle.getText("countryES")
+                    },
+                    {
+                        key: "PT",
+                        text: i18nBundle.getText("countryPT")
+                    },
+                ]
+            }
+            oJSONModel.setData(oModel);
+            oView.setModel(oJSONModel);
         }
+
+        let Main = Controller.extend("logaligroup.employees.controller.MainView", {});
+
+        Main.prototype.onInit = onInit;
 
         Main.prototype.onInputLiveChange = function () {
             const input = this.getView().byId("idEmployeeInput");
