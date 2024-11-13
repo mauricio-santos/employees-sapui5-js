@@ -16,9 +16,9 @@ sap.ui.define([
             oJSONModel.loadData("./localService/mockdata/Employees.json");
 
             //Chamada assíncrona. Função é Executada quando o modelo é carrregado
-            oJSONModel.attachRequestCompleted(function(oEventModel) {
-                console.log(JSON.stringify(oJSONModel.getData()));
-            })
+            // oJSONModel.attachRequestCompleted(function(oEventModel) {
+            //     console.log(JSON.stringify(oJSONModel.getData()));
+            // })
 
             oView.setModel(oJSONModel);
         }

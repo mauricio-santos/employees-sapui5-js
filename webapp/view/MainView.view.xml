@@ -10,15 +10,70 @@
             <pages>
                 <Page id="idTitlePage" title="{i18n>title}">
                     <content>
-                        <Label id="idEmployeeLabel" class="sapUiSmallMargin" text="{i18n>labelEmployee}" labelFor="idEmployeeInput"/>
-                        <Input id="idEmployeeIdInput" class="sapUiSmallMarginEnd sapUiTinyMarginTop" value="{/EmployeeId}" width="200px" maxLength="6" liveChange="onEmployeeIdInputLiveChange"/>
+                        <HBox id="idInputHBox">
+                            <Label id="idEmployeeLabel" class="sapUiSmallMargin" text="{i18n>labelEmployee}" labelFor="idEmployeeInput"/>
+                            <Input id="idEmployeeIdInput" class="sapUiSmallMarginEnd sapUiTinyMarginTop" value="{/EmployeeId}" width="200px" maxLength="6" liveChange="onEmployeeIdInputLiveChange"/>
 
-                        <Label id="idCountryLabel" class="sapUiSmallMargin" text="{i18n>labelCountry}" visible="false"/>
-                        <Select id="idListCountrySelect" visible="false" class="sapUiTinyMarginTop" selectedKey="{/CountryKey}" items="{/ListCountry}">
-                            <items>
-                                <core:Item id="idTextItem" key="{Key}" text="{Text}"/>
-                            </items>
-                        </Select>
+                            <Label id="idCountryLabel" class="sapUiSmallMargin" text="{i18n>labelCountry}" visible="false"/>
+                            <Select id="idListCountrySelect" visible="false" class="sapUiTinyMarginTop" selectedKey="{/CountryKey}" items="{/ListCountry}">
+                                <items>
+                                    <core:Item id="idTextItem" key="{Key}" text="{Text}"/>
+                                </items>
+                            </Select>
+                        </HBox>
+
+                        <HBox id="idTableHBox">
+                            <Table id="idEmployeesTable" items="{/Employees}">
+                                
+                                <!-- Colunas -->
+                                <columns>
+                                    <!-- ID -->
+                                    <Column id="idTableIDColumn">
+                                        <header>
+                                            <Label id="idIDTableLabel" text="{i18n>labelId}"/>
+                                        </header>
+                                    </Column>
+
+                                     <!-- Name -->
+                                    <Column id="idTableNameColumn">
+                                        <header>
+                                            <Label id="idNameTableLabel" text="{i18n>labelName}"/>
+                                        </header>
+                                    </Column>
+
+                                    <!-- Country -->
+                                    <Column id="idTableCountryColumn">
+                                        <header>
+                                            <Label id="idCountryTableLabel" text="{i18n>labelCountry}"/>
+                                        </header>
+                                    </Column>
+
+                                    <!-- City -->
+                                    <Column id="idTableCityColumn">
+                                        <header>
+                                            <Label id="idCityTableLabel" text="{i18n>labelCity}"/>
+                                        </header>
+                                    </Column>
+                                </columns>
+
+                                <!-- Linhas -->
+                                <items>
+                                    <ColumnListItem id="idColumnListItem">
+                                        <cells>
+                                            <!-- ID -->
+                                            <Label id="idEmployeeIDItemLabel" text="{EmployeeID}"/>
+                                            <!-- Name -->
+                                            <Label id="idNameItemLabel" text="{FirstName} , {FirstName}"/>
+                                            <!-- Country -->
+                                            <Label id="idCountryItemLabel" text="{Country}"/>
+                                            <!-- City -->
+                                            <Label id="idCityItemLabel" text="{City}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </HBox>
+
                     </content>
                 </Page>            
             </pages>
