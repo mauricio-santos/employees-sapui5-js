@@ -11,15 +11,12 @@
                 <Page id="idTitlePage" title="{i18n>title}">
                     <content>
                         <Label id="idEmployeeLabel" class="sapUiSmallMargin" text="{i18n>labelEmployee}" labelFor="idEmployeeInput"/>
-                        <Input id="idEmployeeInput" class="sapUiSmallMarginEnd sapUiTinyMarginTop" width="200px" maxLength="6" liveChange="onInputLiveChange"/>
+                        <Input id="idEmployeeIdInput" class="sapUiSmallMarginEnd sapUiTinyMarginTop" value="{/employeeId}" width="200px" maxLength="6" liveChange="onEmployeeIdInputLiveChange"/>
 
                         <Label id="idCountryLabel" class="sapUiSmallMargin" text="{i18n>labelCountry}" visible="false"/>
-                        <Select id="idSelect" visible="false" class="sapUiTinyMarginTop">
+                        <Select id="idListCountrySelect" visible="false" class="sapUiTinyMarginTop" selectedKey="{/countryKey}" items="{/listCountry}">
                             <items>
-                                <core:Item id="idUnitedStatesItem" key="US" text="{i18n>countryUS}"/>
-                                <core:Item id="idBrazilItem" key="BR" text="{i18n>countryBR}"/>
-                                <core:Item id="idSpainItem" key="ES" text="{i18n>countryES}"/>
-                                <core:Item id="idPortugalItem" key="PT" text="{i18n>countryPT}"/>
+                                <core:Item id="idTextItem" key="{key}" text="{text}"/>
                             </items>
                         </Select>
                     </content>

@@ -15,7 +15,7 @@ sap.ui.define([
             const oJSONModel = new JSONModel();
 
             const oModel = {
-                employeeId: "13456",
+                employeeId: "12345",
                 countryKey: "BR",
                 listCountry: [
                     {
@@ -44,13 +44,13 @@ sap.ui.define([
 
         Main.prototype.onInit = onInit;
 
-        Main.prototype.onInputLiveChange = function () {
-            const input = this.getView().byId("idEmployeeInput");
+        Main.prototype.onEmployeeIdInputLiveChange = function () {
+            const input = this.getView().byId("idEmployeeIdInput");
             const value = input.getValue();
             const maxLength = input.getMaxLength();
             const valueLength = value.length;
             const label = this.getView().byId("idCountryLabel");
-            const select = this.getView().byId("idSelect");
+            const select = this.getView().byId("idListCountrySelect");
 
             if (valueLength === maxLength) {
                 label.setVisible(true);
