@@ -1,15 +1,21 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
+    "sap/ui/core/mvc/Controller",
+    "sap/ui/model/json/JSONModel"
 ],
-function (Controller) {
-    "use strict";
+    /**
+     * @param {typeof sap.ui.core.mvc.Controller} Controller 
+     * @param {typeof sap.ui.model.json.JSONModel} JSONModel 
+     */
+    function (Controller, JSONModel) {
+        "use strict";
 
-    return Controller.extend("logaligroup.employees.controller.MainView", {
-        onInit: function () {
+        const Main = Controller.extend("logaligroup.employees.controller.MainView", {});
 
-        },
+        Main.prototype.onInit = function() {
+            
+        }
 
-        onInputLiveChange: function () {
+        Main.prototype.onInputLiveChange = function () {
             const input = this.getView().byId("idEmployeeInput");
             const value = input.getValue();
             const maxLength = input.getMaxLength();
@@ -24,6 +30,7 @@ function (Controller) {
                 label.setVisible(false);
                 select.setVisible(false);
             }
-        }
+        };
+
+        return Main;
     });
-});
