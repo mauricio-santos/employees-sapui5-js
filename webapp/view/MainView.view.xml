@@ -1,7 +1,19 @@
-<mvc:View controllerName="logaligroup.employees.controller.MainView"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
-    </Page>
+<mvc:View 
+    controllerName="logaligroup.employees.controller.MainView"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc" 
+    displayBlock="true"
+>
+    <Shell id="idShell">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>title}">
+                    <content />
+                </Page>            
+            </pages>
+        </App>
+    </Shell>
+
+
+
 </mvc:View>
