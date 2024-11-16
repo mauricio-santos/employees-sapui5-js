@@ -23,55 +23,57 @@
                         </HBox>
 
                         <HBox id="idTableHBox">
-                            <Table id="idEmployeesTable" items="{/Employees}">
-                                
-                                <!-- Colunas -->
-                                <columns>
-                                    <!-- ID -->
-                                    <Column id="idTableIDColumn">
-                                        <header>
-                                            <Label id="idIDTableLabel" text="{i18n>labelId}"/>
-                                        </header>
-                                    </Column>
+                            <Panel id="idTablePanel">
+                                <Table id="idEmployeesTable" items="{/Employees}">
 
-                                     <!-- Name -->
-                                    <Column id="idTableNameColumn">
-                                        <header>
-                                            <Label id="idNameTableLabel" text="{i18n>labelName}"/>
-                                        </header>
-                                    </Column>
+                                    <!-- Colunas -->
+                                    <columns>
+                                        <!-- ID -->
+                                        <Column id="idTableIDColumn">
+                                            <header>
+                                                <Label id="idIDTableLabel" text="{i18n>labelId}"/>
+                                            </header>
+                                        </Column>
 
-                                    <!-- Country -->
-                                    <Column id="idTableCountryColumn">
-                                        <header>
-                                            <Label id="idCountryTableLabel" text="{i18n>labelCountry}"/>
-                                        </header>
-                                    </Column>
+                                        <!-- Name -->
+                                        <Column id="idTableNameColumn">
+                                            <header>
+                                                <Label id="idNameTableLabel" text="{i18n>labelName}"/>
+                                            </header>
+                                        </Column>
 
-                                    <!-- City -->
-                                    <Column id="idTableCityColumn">
-                                        <header>
-                                            <Label id="idCityTableLabel" text="{i18n>labelCity}"/>
-                                        </header>
-                                    </Column>
-                                </columns>
+                                        <!-- Country -->
+                                        <Column id="idTableCountryColumn">
+                                            <header>
+                                                <Label id="idCountryTableLabel" text="{i18n>labelCountry}"/>
+                                            </header>
+                                        </Column>
 
-                                <!-- Linhas -->
-                                <items>
-                                    <ColumnListItem id="idColumnListItem">
-                                        <cells>
-                                            <!-- ID -->
-                                            <Label id="idEmployeeIDItemLabel" text="{EmployeeID}"/>
-                                            <!-- Name -->
-                                            <Label id="idNameItemLabel" text="{FirstName} , {FirstName}"/>
-                                            <!-- Country -->
-                                            <Label id="idCountryItemLabel" text="{Country}"/>
-                                            <!-- City -->
-                                            <Label id="idCityItemLabel" text="{City}"/>
-                                        </cells>
-                                    </ColumnListItem>
-                                </items>
-                            </Table>
+                                        <!-- City -->
+                                        <Column id="idTableCityColumn">
+                                            <header>
+                                                <Label id="idCityTableLabel" text="{i18n>labelCity}"/>
+                                            </header>
+                                        </Column>
+                                    </columns>
+
+                                    <!-- Linhas -->
+                                    <items>
+                                        <ColumnListItem id="idColumnListItem">
+                                            <cells>
+                                                <!-- ID -->
+                                                <Label id="idEmployeeIDItemLabel" text="{EmployeeID}"/>
+                                                <!-- Name -->
+                                                <Label id="idNameItemLabel" text="{FirstName} , {FirstName}"/>
+                                                <!-- Country -->
+                                                <Label id="idCountryItemLabel" text="{Country}"/>
+                                                <!-- City -->
+                                                <Label id="idCityItemLabel" text="{City}"/>
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </Panel>
                         </HBox>
 
                     </content>
