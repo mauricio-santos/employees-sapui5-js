@@ -1,7 +1,11 @@
 {
-    "EmployeeId": "12345",
-    "CountryKey": "BR",
+    "EmployeeId": "",
+    "CountryKey": "",
     "ListCountry": [
+        {
+            "Key": "",
+            "Text": "Select your Country"
+        },
         {
             "Key": "US",
             "Text": "United States"

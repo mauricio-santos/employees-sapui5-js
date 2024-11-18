@@ -12,14 +12,17 @@
                     <content>
                         <HBox id="idInputHBox">
                             <Label id="idEmployeeLabel" class="sapUiSmallMargin" text="{i18n>labelEmployee}" labelFor="idEmployeeInput"/>
-                            <Input id="idEmployeeIdInput" class="sapUiSmallMarginEnd sapUiTinyMarginTop" value="{/EmployeeId}" width="200px" maxLength="6" liveChange="onEmployeeIdInputLiveChange"/>
+                            <Input id="idEmployeeIdInput" class="sapUiSmallMarginEnd sapUiTinyMarginTop" value="{/EmployeeId}" width="200px" maxLength="6"/>
 
-                            <Label id="idCountryLabel" class="sapUiSmallMargin" text="{i18n>labelCountry}" visible="false"/>
-                            <Select id="idListCountrySelect" visible="false" class="sapUiTinyMarginTop" selectedKey="{/CountryKey}" items="{/ListCountry}">
+                            <Label id="idCountryLabel" class="sapUiSmallMargin" text="{i18n>labelCountry}"/>
+                            <Select id="idListCountrySelect" class="sapUiTinyMarginTop" selectedKey="{/CountryKey}" items="{/ListCountry}">
                                 <items>
                                     <core:Item id="idTextItem" key="{Key}" text="{Text}"/>
                                 </items>
                             </Select>
+
+                            <Button id="idFilterButton" class="sapUiSmallMarginBegin sapUiTinyMarginTop" text="{i18n>LabelBtnFilter}" icon="sap-icon://search" press="onFilterButtonPress"/>
+                            <Button id="idClearFilterButton" class="sapUiSmallMarginBegin sapUiTinyMarginTop" text="{i18n>LabelBtnClearFilter}" icon="sap-icon://clear-filter" press="onClearFilterButtonPress"/>
                         </HBox>
 
                         <HBox id="idTableHBox">
