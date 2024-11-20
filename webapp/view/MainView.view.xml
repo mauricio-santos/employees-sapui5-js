@@ -62,7 +62,7 @@
 
                                     <!-- Linhas -->
                                     <items>
-                                        <ColumnListItem id="idColumnListItem">
+                                        <ColumnListItem id="idColumnListItem" type="Active" press="onColumnListItemPress">
                                             <cells>
                                                 <!-- ID -->
                                                 <Label id="idEmployeeIDItemLabel" text="{EmployeeID}"/>
