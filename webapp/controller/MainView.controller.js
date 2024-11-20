@@ -2,15 +2,17 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
+    "sap/ui/model/FilterOperator",
+    "sap/m/MessageToast"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller 
      * @param {typeof sap.ui.model.json.JSONModel} JSONModel 
      * @param {typeof sap.ui.model.Filter} Filter 
      * @param {typeof sap.ui.model.FilterOperator} FilterOperator 
+     * @param {typeof sap.m.MessageToast} MessageToast 
      */
-    function (Controller, JSONModel, Filter, FilterOperator) {
+    function (Controller, JSONModel, Filter, FilterOperator, MessageToast) {
         "use strict";
 
         function onInit() {
@@ -57,10 +59,20 @@ sap.ui.define([
             
         };
 
+        function onColumnListItemPress(event) {            
+            const itemPress = event.getSource(); //Obtendo item pressionado
+            const oContext = itemPress.getBindingContext(); //Obtendo o contexto
+            const oItem = oContext.getObject(); //Obtendo o objeto
+            const postalCode = oItem.PostalCode; //Obtendo o código postal
+
+            MessageToast.show(postalCode); 
+        }
+
         const Main = Controller.extend("logaligroup.employees.controller.MainView", {});
         Main.prototype.onInit = onInit;
         Main.prototype.onFilterButtonPress = onFilterButtonPress;
         Main.prototype.onClearFilterButtonPress = onClearFilterButtonPress;
+        Main.prototype.onColumnListItemPress = onColumnListItemPress;
 
         return Main;
     });
