@@ -41,10 +41,21 @@ controllerName="logaligroup.employees.controller.ListTypes"
 											/>
 										</items>
 									</List>
-								
 								</IconTabFilter>
 
-								<IconTabFilter id="idInputListIconTabFilter" text="{i18n>inputList}"/>
+								<!-- INPUT LIST -->
+								<IconTabFilter id="idInputListIconTabFilter" text="{i18n>inputList}">
+									<List id="idProductsList" items="{/Products}">
+										<items>
+											<InputListItem id="idInputListItem" label="{Brand}">
+												<Select id="idPropertiesSelect" items="{Properties}">
+													<core:Item id="idTextSelectItem" key="{id}" text="{Text}"/>
+												</Select>
+											</InputListItem>
+										</items>
+									</List>
+								</IconTabFilter>
+								
 								<IconTabFilter id="idNotificationListIconTabFilter"  text="{i18n>notificationList}"/>
 								<IconTabFilter id="idCustomListIconTabFilter"  text="{i18n>customList}"/>
 							</items>
