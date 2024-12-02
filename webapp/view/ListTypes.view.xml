@@ -14,7 +14,7 @@ controllerName="logaligroup.employees.controller.ListTypes"
 							<items>
 								<!-- OBJECT LIST ITEM -->
 								<IconTabFilter id="idObjectListIconTabFilter" text="{i18n>objectList}">
-									<List id="idProductsList" items="{/Products}">
+									<List id="idProductsObjList" items="{/Products}">
 										<items>
 											<ObjectListItem id="idPriceObjectListItem"
 												title="{Material} {Brand} {Model}"
@@ -29,7 +29,21 @@ controllerName="logaligroup.employees.controller.ListTypes"
 									</List>
 								</IconTabFilter>
 
-								<IconTabFilter id="idStandardListIconTabFilter" text="{i18n>standardList}"/>
+								<!-- STANDARD LIST -->
+								<IconTabFilter id="idStandardListIconTabFilter" text="{i18n>standardList}">
+									<List id="idProductsStdList" items="{/Products}">
+										<items>
+											<StandardListItem id="idStandardListItem"
+												title="{Material} {Brand} {Model}"
+												description="{Weight}"
+												info="{Price} {Currency}"
+												type="Active"
+											/>
+										</items>
+									</List>
+								
+								</IconTabFilter>
+
 								<IconTabFilter id="idInputListIconTabFilter" text="{i18n>inputList}"/>
 								<IconTabFilter id="idNotificationListIconTabFilter"  text="{i18n>notificationList}"/>
 								<IconTabFilter id="idCustomListIconTabFilter"  text="{i18n>customList}"/>
