@@ -1,0 +1,28 @@
+<mvc:View
+controllerName="logaligroup.employees.controller.ListTypes"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+>
+	<Shell id="idListShell">
+		<App id="idApp">
+			<pages>
+				<Page id="idListPage" title="{i18n>listTitle}">
+					<content>
+						<IconTabBar id="idIconTabBar">
+							<items>
+								<IconTabFilter id="idObjectListIconTabFilter" text="{i18n>objectList}"/>
+								<IconTabFilter id="idStandardListIconTabFilter" text="{i18n>standardList}"/>
+								<IconTabFilter id="idInputListIconTabFilter" text="{i18n>inputList}"/>
+								<IconTabFilter id="idNotificationListIconTabFilter"  text="{i18n>notificationList}"/>
+								<IconTabFilter id="idCustomListIconTabFilter"  text="{i18n>customList}"/>
+							</items>
+						</IconTabBar>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+
+</mvc:View>
