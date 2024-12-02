@@ -18,6 +18,7 @@ sap.ui.define([
                 const oJSONModel = new JSONModel();
                 const mockdataSource = "./localService/mockdata/ListData.json";
                 oJSONModel.loadData(mockdataSource);
+                this.getView().setModel(oJSONModel);
             }
 
 

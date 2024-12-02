@@ -12,7 +12,23 @@ controllerName="logaligroup.employees.controller.ListTypes"
 					<content>
 						<IconTabBar id="idIconTabBar">
 							<items>
-								<IconTabFilter id="idObjectListIconTabFilter" text="{i18n>objectList}"/>
+								<!-- OBJECT LIST ITEM -->
+								<IconTabFilter id="idObjectListIconTabFilter" text="{i18n>objectList}">
+									<List id="idProductsList" items="{/Products}">
+										<items>
+											<ObjectListItem id="idPriceObjectListItem"
+												title="{Material} {Brand} {Model}"
+												number="{Price}"
+												numberUnit="{Currency}"
+												type="Detail"
+											>
+												<ObjectAttribute id="idBrandObjectAttribute" text="{Brand}"/>
+												<ObjectAttribute id="idWeightObjectAttribute" text="{Weight}"/>
+											</ObjectListItem>
+										</items>
+									</List>
+								</IconTabFilter>
+
 								<IconTabFilter id="idStandardListIconTabFilter" text="{i18n>standardList}"/>
 								<IconTabFilter id="idInputListIconTabFilter" text="{i18n>inputList}"/>
 								<IconTabFilter id="idNotificationListIconTabFilter"  text="{i18n>notificationList}"/>
