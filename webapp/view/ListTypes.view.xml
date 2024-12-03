@@ -3,6 +3,7 @@ controllerName="logaligroup.employees.controller.ListTypes"
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:layout="sap.ui.layout"
 	displayBlock="true"
 >
 	<Shell id="idListShell">
@@ -72,7 +73,20 @@ controllerName="logaligroup.employees.controller.ListTypes"
 									</List>
 								</IconTabFilter>
 								
-								<IconTabFilter id="idCustomListIconTabFilter"  text="{i18n>customList}"/>
+								<!-- Custom LIST -->
+								<IconTabFilter id="idCustomListIconTabFilter"  text="{i18n>customList}">
+									<List id="idNewsCustomList" items="{/News}">
+										<items>
+											<CustomListItem id="idCustomListItem">
+												<layout:Grid id="idCustomListGrid">
+													<Text id="idTitleText" text="{Title}"/>				
+													<Text id="idAuthorText" text="{Author}"/>				
+													<Text id="idDescriptionText" text="{Description}"/>							
+												</layout:Grid>
+											</CustomListItem>
+										</items>										
+									</List>
+								</IconTabFilter>
 							</items>
 						</IconTabBar>
 					</content>
