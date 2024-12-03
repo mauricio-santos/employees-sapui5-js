@@ -41,6 +41,15 @@ controllerName="logaligroup.employees.controller.ListTypes"
 
 								<!-- STANDARD LIST -->
 								<IconTabFilter id="idStandardListIconTabFilter" text="{i18n>standardList}">
+									<Text id="idSelectionsModeListText" class="sapUiTinyMarginTop sapUiSmallMarginEnd" text="{i18n>selectionMode}"/>
+									<Select id="idModeListSelect" selectedKey="{/SelectedModeList}">
+										<core:Item id="idNoneItem" key="None" text="{i18n>none}"/>
+										<core:Item id="idMultiSelectItem" key="MultiSelect" text="{i18n>multiSelect}"/>
+										<core:Item id="idSingleSelectItem" key="SingleSelect" text="{i18n>singleSelect}"/>
+										<core:Item id="idSingleSelectLeftItem" key="SingleSelectLeft" text="{i18n>singleSelectLeft}"/>
+										<core:Item id="idSingleSelectMasterItem" key="SingleSelectMaster" text="{i18n>singleSelectMaster}"/>
+										<core:Item id="idDeleteItem" key="Delete" text="{i18n>delete}"/>
+									</Select>
 									<List id="idProductsStdList" 
 										items="{
 											path: '/Products',
@@ -51,6 +60,7 @@ controllerName="logaligroup.employees.controller.ListTypes"
 											},
 											groupHeaderFactory: '.getGroupHeader'
 										}"
+										mode="{/SelectedModeList}"
 										
 									>
 										<items>

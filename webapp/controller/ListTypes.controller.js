@@ -23,9 +23,7 @@ sap.ui.define([
                 this.getView().setModel(oJSONModel);
             },
 
-            getGroupHeader: function (oGroup){
-                console.log(oGroup);
-                
+            getGroupHeader: function (oGroup){            
                 const groupHeaderListItem = new GroupHeaderListItem({
                     title: oGroup.key,
                     upperCase: true,
