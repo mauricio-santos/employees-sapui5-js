@@ -52,6 +52,7 @@ controllerName="logaligroup.employees.controller.ListTypes"
 									</Select>
 
 									<Button id="idShowSelectedItemsButton" class="sapUiSmallMarginBegin" text="{i18n>noSelection}" press="onShowSelectedItemsButtonPress"/>
+									<Button id="idDeleteSelectedItemsButton" class="sapUiSmallMarginBegin" text="{i18n>deleteSelection}" press="onDeleteSelectedItemsButtonPress"/>
 
 									<List id="idProductsStdList" 
 										items="{
