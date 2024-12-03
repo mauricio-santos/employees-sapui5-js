@@ -50,6 +50,9 @@ controllerName="logaligroup.employees.controller.ListTypes"
 										<core:Item id="idSingleSelectMasterItem" key="SingleSelectMaster" text="{i18n>singleSelectMaster}"/>
 										<core:Item id="idDeleteItem" key="Delete" text="{i18n>delete}"/>
 									</Select>
+
+									<Button id="idShowSelectedItemsButton" class="sapUiSmallMarginBegin" text="{i18n>btnSelectedItems}" press="onShowSelectedItemsButtonPress"/>
+
 									<List id="idProductsStdList" 
 										items="{
 											path: '/Products',
