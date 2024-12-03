@@ -56,7 +56,22 @@ controllerName="logaligroup.employees.controller.ListTypes"
 									</List>
 								</IconTabFilter>
 								
-								<IconTabFilter id="idNotificationListIconTabFilter"  text="{i18n>notificationList}"/>
+								<!-- NOTIFICATION LIST -->
+								<IconTabFilter id="idNotificationListIconTabFilter"  text="{i18n>notificationList}">
+									<List id="idNewsList" items="{/News}">
+										<items>
+											<NotificationListItem id="idNotificationListItem"
+												title="{Title}"
+												description="{Description}"
+												unread="{Unread}"
+												authorName="{Author}"
+												priority="{Priority}"
+												showCloseButton="{ShowCloseButton}"
+											/>
+										</items>									
+									</List>
+								</IconTabFilter>
+								
 								<IconTabFilter id="idCustomListIconTabFilter"  text="{i18n>customList}"/>
 							</items>
 						</IconTabBar>
