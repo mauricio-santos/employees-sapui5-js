@@ -15,7 +15,16 @@ controllerName="logaligroup.employees.controller.ListTypes"
 							<items>
 								<!-- OBJECT LIST ITEM -->
 								<IconTabFilter id="idObjectListIconTabFilter" text="{i18n>objectList}">
-									<List id="idProductsObjList" items="{/Products}">
+									<List id="idProductsObjList"
+										items="{
+											path: '/Products',
+											filters: [{
+												path: 'Brand',
+												operator: 'EQ',
+												value1: 'Compaq'
+											}]
+										}"
+									>
 										<items>
 											<ObjectListItem id="idPriceObjectListItem"
 												title="{Material} {Brand} {Model}"
