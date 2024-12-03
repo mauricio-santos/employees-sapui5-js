@@ -41,7 +41,17 @@ controllerName="logaligroup.employees.controller.ListTypes"
 
 								<!-- STANDARD LIST -->
 								<IconTabFilter id="idStandardListIconTabFilter" text="{i18n>standardList}">
-									<List id="idProductsStdList" items="{/Products}">
+									<List id="idProductsStdList" 
+										items="{
+											path: '/Products',
+											sorter: {
+												path: 'Brand',
+												descending: false,
+												group: true
+											}
+										}"
+										
+									>
 										<items>
 											<StandardListItem id="idStandardListItem"
 												title="{Material} {Brand} {Model}"
