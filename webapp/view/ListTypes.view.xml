@@ -48,7 +48,8 @@ controllerName="logaligroup.employees.controller.ListTypes"
 												path: 'Brand',
 												descending: false,
 												group: true
-											}
+											},
+											groupHeaderFactory: '.getGroupHeader'
 										}"
 										
 									>
