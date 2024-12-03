@@ -95,7 +95,23 @@ sap.ui.define([
                 }else{
                     MessageToast.show(sMsgNoSelection);
                 }
+            },
+
+            onProductsListDelete: function(event) {
+                const selectedRow = event.getParameter("listItem");
+                const context = selectedRow.getBindingContext();
+                const item = context.getObject()            
+                const splitPath = context.getPath().split("/");
+                const indexSelectedRow = splitPath[splitPath.length - 1];
+                const model = this.getView().getModel();
+                const products = model.getProperty("/Products");
+                const i18nModel = this.getView().getModel("i18n").getResourceBundle();
+                const sMsgRemoved = i18nModel.getText("removed");
+                                
+                products.splice(indexSelectedRow, 1);
+                model.refresh()
+                MessageToast.show(sMsgRemoved + "\n" + item.Material);
             }
-            
+
         });
 });

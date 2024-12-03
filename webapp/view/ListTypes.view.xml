@@ -80,9 +80,9 @@ controllerName="logaligroup.employees.controller.ListTypes"
 
 								<!-- INPUT LIST -->
 								<IconTabFilter id="idInputListIconTabFilter" text="{i18n>inputList}">
-									<List id="idProductsList" items="{/Products}">
+									<List id="idProductsList" items="{/Products}" mode="Delete" delete="onProductsListDelete">
 										<items>
-											<InputListItem id="idInputListItem" label="{Brand}">
+											<InputListItem id="idInputListItem" label="{Material} {Brand} {Model}">
 												<Select id="idPropertiesSelect" items="{Properties}">
 													<core:Item id="idTextSelectItem" key="{id}" text="{Text}"/>
 												</Select>
