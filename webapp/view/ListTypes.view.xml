@@ -51,7 +51,7 @@ controllerName="logaligroup.employees.controller.ListTypes"
 										<core:Item id="idDeleteItem" key="Delete" text="{i18n>delete}"/>
 									</Select>
 
-									<Button id="idShowSelectedItemsButton" class="sapUiSmallMarginBegin" text="{i18n>btnSelectedItems}" press="onShowSelectedItemsButtonPress"/>
+									<Button id="idShowSelectedItemsButton" class="sapUiSmallMarginBegin" text="{i18n>noSelection}" press="onShowSelectedItemsButtonPress"/>
 
 									<List id="idProductsStdList" 
 										items="{
@@ -64,7 +64,7 @@ controllerName="logaligroup.employees.controller.ListTypes"
 											groupHeaderFactory: '.getGroupHeader'
 										}"
 										mode="{/SelectedModeList}"
-										
+										selectionChange="onProductsListSelectionChange"
 									>
 										<items>
 											<StandardListItem id="idStandardListItem"

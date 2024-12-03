@@ -48,12 +48,19 @@ sap.ui.define([
                         text += `${index+1}. ${oContext.Material}\n`;
 
                         MessageToast.show(text.toUpperCase());
-                    })                                     
+                    })                              
                 }else{
                     MessageToast.show(i18nModel.getText("noSelection"))
                 }
+            },
+
+            onProductsListSelectionChange: function() {
+                let btnSelectedItems = this.getView().byId("idShowSelectedItemsButton");
+                let selectedItems = this.getView().byId("idProductsStdList").getSelectedItems().length;
+                const oBundle = this.getView().getModel("i18n").getResourceBundle();
+                const sMsg = oBundle.getText("btnSelectedItems", [selectedItems])
+                
+                btnSelectedItems.setProperty("text", sMsg);
             }
-
-
         });
 });
