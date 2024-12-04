@@ -34,7 +34,7 @@ sap.ui.define([
         };
 
         function onFilterButtonPress() {
-            const oJSON = this.getView().getModel().getData();
+            const oJSON = this.getView().getModel("countriesModel").getData();
             const countryKey = oJSON.CountryKey;
             const employeeId = oJSON.EmployeeId;
             const filters = [];
@@ -53,7 +53,7 @@ sap.ui.define([
         };
 
         function onClearFilterButtonPress() {
-            const oModel = this.getView().getModel();
+            const oModel = this.getView().getModel("countriesModel");
             oModel.setProperty("/EmployeeId", "");
             oModel.setProperty("/CountryKey", "");
 
@@ -65,7 +65,7 @@ sap.ui.define([
 
         function onColumnListItemPress(event) {            
             const itemPress = event.getSource(); //Obtendo item pressionado
-            const oContext = itemPress.getBindingContext(); //Obtendo o contexto
+            const oContext = itemPress.getBindingContext("employeesModel"); //Obtendo o contexto
             const oItem = oContext.getObject(); //Obtendo o objeto
             const postalCode = oItem.PostalCode; //Obtendo o código postal
 
