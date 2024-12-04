@@ -17,16 +17,20 @@ sap.ui.define([
 
         function onInit() {
             const oView = this.getView();
-            const oJSONModel = new JSONModel();
 
-            oJSONModel.loadData("./localService/mockdata/Employees.json");
+            const employeesModel = new JSONModel();
+            employeesModel.loadData("./localService/mockdata/Employees.json");
+            oView.setModel(employeesModel, "employeesModel");
+            
+            const countriesModel = new JSONModel();
+            countriesModel.loadData("./localService/mockdata/Countries.json");
+            oView.setModel(countriesModel, "countriesModel");
 
             //Chamada assíncrona. Função é Executada quando o modelo é carrregado
             // oJSONModel.attachRequestCompleted(function(oEventModel) {
             //     console.log(JSON.stringify(oJSONModel.getData()));
             // })
 
-            oView.setModel(oJSONModel);
         };
 
         function onFilterButtonPress() {
