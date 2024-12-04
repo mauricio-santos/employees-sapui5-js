@@ -65,7 +65,7 @@
 
                                     <!-- Linhas -->
                                     <items>
-                                        <ColumnListItem id="idColumnListItem" type="Active" press="onColumnListItemPress">
+                                        <ColumnListItem id="idColumnListItem" type="Active" press="showOrders">
                                             <cells>
                                                 <!-- ID -->
                                                 <Label id="idEmployeeIDItemLabel" text="{employeesModel>EmployeeID}"/>
@@ -79,6 +79,9 @@
                                         </ColumnListItem>
                                     </items>
                                 </Table>
+
+                                <!-- Tabela dinâmica de ordens -->
+                                <HBox id="idOrdersHBox"/>
                             </Panel>
                         </HBox>
 
