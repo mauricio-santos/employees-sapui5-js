@@ -27,33 +27,36 @@
 
                         <HBox id="idTableHBox">
                             <Panel id="idTablePanel">
+                                <Button id="idShowCityButton" text="{i18n>btnShowCity}" visible="{configModel>/visibleBtnShowCity}" press="onShowCityButtonPress"/>
+                                <Button id="idHideCityButton" text="{i18n>btnHideCity}" visible="{configModel>/visibleBtnHideCity}" press="onHideCityButtonPress"/>
+
                                 <Table id="idEmployeesTable" items="{employeesModel>/Employees}">
 
                                     <!-- Colunas -->
                                     <columns>
                                         <!-- ID -->
-                                        <Column id="idTableIDColumn">
+                                        <Column id="idTableIDColumn" visible="{configModel>/visibleId}">
                                             <header>
                                                 <Label id="idIDTableLabel" text="{i18n>labelId}"/>
                                             </header>
                                         </Column>
 
                                         <!-- Name -->
-                                        <Column id="idTableNameColumn">
+                                        <Column id="idTableNameColumn" visible="{configModel>/visibleName}">
                                             <header>
                                                 <Label id="idNameTableLabel" text="{i18n>labelName}"/>
                                             </header>
                                         </Column>
 
                                         <!-- Country -->
-                                        <Column id="idTableCountryColumn">
+                                        <Column id="idTableCountryColumn" visible="{configModel>/visibleCountry}">
                                             <header>
                                                 <Label id="idCountryTableLabel" text="{i18n>labelCountry}"/>
                                             </header>
                                         </Column>
 
                                         <!-- City -->
-                                        <Column id="idTableCityColumn">
+                                        <Column id="idTableCityColumn" visible="{configModel>/visibleCity}">
                                             <header>
                                                 <Label id="idCityTableLabel" text="{i18n>labelCity}"/>
                                             </header>

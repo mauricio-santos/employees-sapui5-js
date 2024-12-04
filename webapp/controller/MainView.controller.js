@@ -31,6 +31,15 @@ sap.ui.define([
             //     console.log(JSON.stringify(oJSONModel.getData()));
             // })
 
+            const configModel = new JSONModel({
+                visibleId: true,
+                visibleName: true,
+                visibleCountry: true,
+                visibleCity: false,
+                visibleBtnShowCity: true,
+                visibleBtnHideCity: false
+            });
+            oView.setModel(configModel, "configModel");
         };
 
         function onFilterButtonPress() {
@@ -63,6 +72,20 @@ sap.ui.define([
             
         };
 
+        function onShowCityButtonPress() {
+            const model = this.getView().getModel("configModel");
+            model.setProperty("/visibleCity", true);
+            model.setProperty("/visibleBtnShowCity", false);
+            model.setProperty("/visibleBtnHideCity", true);
+        };
+
+        function onHideCityButtonPress() {
+            const model = this.getView().getModel("configModel");
+            model.setProperty("/visibleCity", false);
+            model.setProperty("/visibleBtnShowCity", true);
+            model.setProperty("/visibleBtnHideCity", false);
+        }
+
         function onColumnListItemPress(event) {            
             const itemPress = event.getSource(); //Obtendo item pressionado
             const oContext = itemPress.getBindingContext("employeesModel"); //Obtendo o contexto
@@ -77,6 +100,8 @@ sap.ui.define([
         Main.prototype.onFilterButtonPress = onFilterButtonPress;
         Main.prototype.onClearFilterButtonPress = onClearFilterButtonPress;
         Main.prototype.onColumnListItemPress = onColumnListItemPress;
+        Main.prototype.onShowCityButtonPress = onShowCityButtonPress;
+        Main.prototype.onHideCityButtonPress = onHideCityButtonPress;
 
         return Main;
     });
