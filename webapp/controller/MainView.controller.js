@@ -17,20 +17,33 @@ sap.ui.define([
 
         function onInit() {
             const oView = this.getView();
-            const oJSONModel = new JSONModel();
 
-            oJSONModel.loadData("./localService/mockdata/Employees.json");
+            const employeesModel = new JSONModel();
+            employeesModel.loadData("./localService/mockdata/Employees.json");
+            oView.setModel(employeesModel, "employeesModel");
+            
+            const countriesModel = new JSONModel();
+            countriesModel.loadData("./localService/mockdata/Countries.json");
+            oView.setModel(countriesModel, "countriesModel");
 
             //Chamada assíncrona. Função é Executada quando o modelo é carrregado
             // oJSONModel.attachRequestCompleted(function(oEventModel) {
             //     console.log(JSON.stringify(oJSONModel.getData()));
             // })
 
-            oView.setModel(oJSONModel);
+            const configModel = new JSONModel({
+                visibleId: true,
+                visibleName: true,
+                visibleCountry: true,
+                visibleCity: false,
+                visibleBtnShowCity: true,
+                visibleBtnHideCity: false
+            });
+            oView.setModel(configModel, "configModel");
         };
 
         function onFilterButtonPress() {
-            const oJSON = this.getView().getModel().getData();
+            const oJSON = this.getView().getModel("countriesModel").getData();
             const countryKey = oJSON.CountryKey;
             const employeeId = oJSON.EmployeeId;
             const filters = [];
@@ -49,7 +62,7 @@ sap.ui.define([
         };
 
         function onClearFilterButtonPress() {
-            const oModel = this.getView().getModel();
+            const oModel = this.getView().getModel("countriesModel");
             oModel.setProperty("/EmployeeId", "");
             oModel.setProperty("/CountryKey", "");
 
@@ -59,9 +72,23 @@ sap.ui.define([
             
         };
 
+        function onShowCityButtonPress() {
+            const model = this.getView().getModel("configModel");
+            model.setProperty("/visibleCity", true);
+            model.setProperty("/visibleBtnShowCity", false);
+            model.setProperty("/visibleBtnHideCity", true);
+        };
+
+        function onHideCityButtonPress() {
+            const model = this.getView().getModel("configModel");
+            model.setProperty("/visibleCity", false);
+            model.setProperty("/visibleBtnShowCity", true);
+            model.setProperty("/visibleBtnHideCity", false);
+        }
+
         function onColumnListItemPress(event) {            
             const itemPress = event.getSource(); //Obtendo item pressionado
-            const oContext = itemPress.getBindingContext(); //Obtendo o contexto
+            const oContext = itemPress.getBindingContext("employeesModel"); //Obtendo o contexto
             const oItem = oContext.getObject(); //Obtendo o objeto
             const postalCode = oItem.PostalCode; //Obtendo o código postal
 
@@ -73,6 +100,8 @@ sap.ui.define([
         Main.prototype.onFilterButtonPress = onFilterButtonPress;
         Main.prototype.onClearFilterButtonPress = onClearFilterButtonPress;
         Main.prototype.onColumnListItemPress = onColumnListItemPress;
+        Main.prototype.onShowCityButtonPress = onShowCityButtonPress;
+        Main.prototype.onHideCityButtonPress = onHideCityButtonPress;
 
         return Main;
     });

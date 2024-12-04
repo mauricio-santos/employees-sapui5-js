@@ -12,12 +12,12 @@
                     <content>
                         <HBox id="idInputHBox">
                             <Label id="idEmployeeLabel" class="sapUiSmallMargin" text="{i18n>labelEmployee}" labelFor="idEmployeeInput"/>
-                            <Input id="idEmployeeIdInput" class="sapUiSmallMarginEnd sapUiTinyMarginTop" value="{/EmployeeId}" width="200px" maxLength="6"/>
+                            <Input id="idEmployeeIdInput" class="sapUiSmallMarginEnd sapUiTinyMarginTop" value="{countriesModel>/EmployeeId}" width="200px" maxLength="6"/>
 
                             <Label id="idCountryLabel" class="sapUiSmallMargin" text="{i18n>labelCountry}"/>
-                            <Select id="idListCountrySelect" class="sapUiTinyMarginTop" selectedKey="{/CountryKey}" items="{/ListCountry}">
+                            <Select id="idListCountrySelect" class="sapUiTinyMarginTop" selectedKey="{countriesModel>/CountryKey}" items="{countriesModel>/ListCountry}">
                                 <items>
-                                    <core:Item id="idTextItem" key="{Key}" text="{Text}"/>
+                                    <core:Item id="idTextItem" key="{countriesModel>Key}" text="{countriesModel>Text}"/>
                                 </items>
                             </Select>
 
@@ -27,33 +27,36 @@
 
                         <HBox id="idTableHBox">
                             <Panel id="idTablePanel">
-                                <Table id="idEmployeesTable" items="{/Employees}">
+                                <Button id="idShowCityButton" text="{i18n>btnShowCity}" visible="{configModel>/visibleBtnShowCity}" press="onShowCityButtonPress"/>
+                                <Button id="idHideCityButton" text="{i18n>btnHideCity}" visible="{configModel>/visibleBtnHideCity}" press="onHideCityButtonPress"/>
+
+                                <Table id="idEmployeesTable" items="{employeesModel>/Employees}">
 
                                     <!-- Colunas -->
                                     <columns>
                                         <!-- ID -->
-                                        <Column id="idTableIDColumn">
+                                        <Column id="idTableIDColumn" visible="{configModel>/visibleId}">
                                             <header>
                                                 <Label id="idIDTableLabel" text="{i18n>labelId}"/>
                                             </header>
                                         </Column>
 
                                         <!-- Name -->
-                                        <Column id="idTableNameColumn">
+                                        <Column id="idTableNameColumn" visible="{configModel>/visibleName}">
                                             <header>
                                                 <Label id="idNameTableLabel" text="{i18n>labelName}"/>
                                             </header>
                                         </Column>
 
                                         <!-- Country -->
-                                        <Column id="idTableCountryColumn">
+                                        <Column id="idTableCountryColumn" visible="{configModel>/visibleCountry}">
                                             <header>
                                                 <Label id="idCountryTableLabel" text="{i18n>labelCountry}"/>
                                             </header>
                                         </Column>
 
                                         <!-- City -->
-                                        <Column id="idTableCityColumn">
+                                        <Column id="idTableCityColumn" visible="{configModel>/visibleCity}">
                                             <header>
                                                 <Label id="idCityTableLabel" text="{i18n>labelCity}"/>
                                             </header>
@@ -65,13 +68,13 @@
                                         <ColumnListItem id="idColumnListItem" type="Active" press="onColumnListItemPress">
                                             <cells>
                                                 <!-- ID -->
-                                                <Label id="idEmployeeIDItemLabel" text="{EmployeeID}"/>
+                                                <Label id="idEmployeeIDItemLabel" text="{employeesModel>EmployeeID}"/>
                                                 <!-- Name -->
-                                                <Label id="idNameItemLabel" text="{FirstName} , {FirstName}"/>
+                                                <Label id="idNameItemLabel" text="{employeesModel>FirstName} , {employeesModel>FirstName}"/>
                                                 <!-- Country -->
-                                                <Label id="idCountryItemLabel" text="{Country}"/>
+                                                <Label id="idCountryItemLabel" text="{employeesModel>Country}"/>
                                                 <!-- City -->
-                                                <Label id="idCityItemLabel" text="{City}"/>
+                                                <Label id="idCityItemLabel" text="{employeesModel>City}"/>
                                             </cells>
                                         </ColumnListItem>
                                     </items>
