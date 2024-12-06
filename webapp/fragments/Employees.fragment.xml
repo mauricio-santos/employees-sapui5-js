@@ -1,0 +1,62 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+    <Panel id="idTablePanel">
+        <Button id="idShowCityButton" text="{i18n>btnShowCity}" visible="{configModel>/visibleBtnShowCity}" press="onShowCityButtonPress"/>
+        <Button id="idHideCityButton" text="{i18n>btnHideCity}" visible="{configModel>/visibleBtnHideCity}" press="onHideCityButtonPress"/>
+
+        <Table id="idEmployeesTable" items="{employeesModel>/Employees}">
+
+            <!-- Colunas -->
+            <columns>
+                <!-- ID -->
+                <Column id="idTableIDColumn" visible="{configModel>/visibleId}">
+                    <header>
+                        <Label id="idIDTableLabel" text="{i18n>labelId}"/>
+                    </header>
+                </Column>
+
+                <!-- Name -->
+                <Column id="idTableNameColumn" visible="{configModel>/visibleName}">
+                    <header>
+                        <Label id="idNameTableLabel" text="{i18n>labelName}"/>
+                    </header>
+                </Column>
+
+                <!-- Country -->
+                <Column id="idTableCountryColumn" visible="{configModel>/visibleCountry}">
+                    <header>
+                        <Label id="idCountryTableLabel" text="{i18n>labelCountry}"/>
+                    </header>
+                </Column>
+
+                <!-- City -->
+                <Column id="idTableCityColumn">
+                    <header>
+                        <Label id="idShowDetailsLabel" text="{i18n>labelShowDetails}"/>
+                    </header>
+                </Column>
+            </columns>
+
+            <!-- Linhas -->
+            <items>
+                <ColumnListItem id="idColumnListItem">
+                    <cells>
+                        <!-- ID -->
+                        <Label id="idEmployeeIDItemLabel" text="{employeesModel>EmployeeID}"/>
+                        <!-- Name -->
+                        <Label id="idNameItemLabel" text="{employeesModel>FirstName} , {employeesModel>FirstName}"/>
+                        <!-- Country -->
+                        <Label id="idCountryItemLabel" text="{employeesModel>Country}"/>
+                        <!-- CShow Details -->
+                        <core:Icon id="idDetailsIcon" src="sap-icon://show" press="showOrders"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+
+        <!-- Tabela dinâmica de ordens -->
+        <HBox id="idOrdersHBox"/>
+    </Panel>
+</core:FragmentDefinition>

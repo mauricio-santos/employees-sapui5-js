@@ -2,15 +2,17 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
+    "sap/ui/model/FilterOperator",
+    "sap/ui/core/Fragment"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller 
      * @param {typeof sap.ui.model.json.JSONModel} JSONModel 
      * @param {typeof sap.ui.model.Filter} Filter 
      * @param {typeof sap.ui.model.FilterOperator} FilterOperator 
+     * @param {typeof sap.ui.core.Fragment} Fragment 
      */
-    function (Controller, JSONModel, Filter, FilterOperator) {
+    function (Controller, JSONModel, Filter, FilterOperator, Fragment) {
         "use strict";
 
         function onInit() {
@@ -85,83 +87,31 @@ sap.ui.define([
         };
 
         function showOrders(event) {
-            const itemPressed = event.getSource();
-            const oContext = itemPressed.getBindingContext("employeesModel");
-            const oEmployee = oContext.getObject();
-            const orders = oEmployee.Orders;
+            const iconPress = event.getSource();
+            const oContext = iconPress.getBindingContext("employeesModel");      
+            const oView = this.getView();
             
-            const ordersList = [];
-            orders.forEach(order => {
-                ordersList.push(new sap.m.ColumnListItem({
-                    cells: [
-                        new sap.m.Label({ text: order.OrderID}),
-                        new sap.m.Label({ text: order.Freight }),
-                        new sap.m.Label({ text: order.ShipAddress })
-                    ]
-                }));
-            });
-
-            const newTable = new sap.m.Table({
-                columns: [
-                    new sap.m.Column({header: new sap.m.Label({ text: "{i18n>orderID}" })}),
-                    new sap.m.Column({header: new sap.m.Label({ text: "{i18n>freight}" })}),
-                    new sap.m.Column({header: new sap.m.Label({ text: "{i18n>shipAddress}" })})
-                ],
-                items: ordersList,
-                width: "auto"
-            }).addStyleClass("sapUiSmallMargin");
-
-            const ordersTable = this.getView().byId("idOrdersHBox");
-            ordersTable.destroyItems(); //Previde chamdas duplicadas
-            ordersTable.addItem(newTable);
-
-            //Realizando o mesmo processo com outra lógica
-            const newTableJSON = new sap.m.Table();
-            newTable.setWidth("auto");
-            newTableJSON.addStyleClass("sapUiSmallMargin");
-
-            const columnOrderID = new sap.m.Column();
-            const labelOrderID = new sap.m.Label();
-            labelOrderID.bindProperty("text", "i18n>orderID");
-            columnOrderID.setHeader(labelOrderID);
-            newTableJSON.addColumn(columnOrderID);
-
-            const columnFreight = new sap.m.Column();
-            const labelFreight = new sap.m.Label();
-            labelFreight.bindProperty("text", "i18n>freight");
-            columnFreight.setHeader(labelFreight);
-            newTableJSON.addColumn(columnFreight);
-
-            const columnShipAddress = new sap.m.Column();
-            const labelShipAddress = new sap.m.Label();
-            labelShipAddress.bindProperty("text", "i18n>shipAddress");
-            columnShipAddress.setHeader(labelShipAddress);
-            newTableJSON.addColumn(columnShipAddress);
-            
-            const columListItems = new sap.m.ColumnListItem();
-
-            const cellLabelOrderID = new sap.m.Label();
-            cellLabelOrderID.bindProperty("text", "employeesModel>OrderID");
-            columListItems.addCell(cellLabelOrderID);
-
-            const cellLabelFreight = new sap.m.Label();
-            cellLabelFreight.bindProperty("text", "employeesModel>Freight");
-            columListItems.addCell(cellLabelFreight);
-
-            const cellLabelShipAddress = new sap.m.Label();
-            cellLabelShipAddress.bindProperty("text", "employeesModel>ShipAddress");
-            columListItems.addCell(cellLabelShipAddress);
-
-            const oBindigInfo = {
-                model: "employeesModel",
-                path: "Orders",
-                template: columListItems
-            };
-
-            newTableJSON.bindAggregation("items", oBindigInfo);
-            newTableJSON.bindElement("employeesModel>" + oContext.getPath());
-            ordersTable.addItem(newTableJSON);
-        };     
+            if (!this.byId("idOrdersDialog")) {
+                Fragment.load({
+                    name: "logaligroup.employees.fragments.OrdersDialog",
+                    id: oView.getId(),
+                    controller: this
+                }).then(function (oDialog) {
+                    oView.addDependent(oDialog);
+                    oDialog.bindElement({
+                        model: "employeesModel",
+                        path: oContext.getPath()    
+                    })
+                    oDialog.open();
+                }).catch(e => console.log(e));
+            } else {
+                this.byId("idOrdersDialog").open();
+            } 
+        };
+        
+        function onCloseDialogButtonPress() {
+            this.byId("idOrdersDialog").close();
+        }
 
         const Main = Controller.extend("logaligroup.employees.controller.MainView", {});
         Main.prototype.onInit = onInit;
@@ -170,6 +120,7 @@ sap.ui.define([
         Main.prototype.onShowCityButtonPress = onShowCityButtonPress;
         Main.prototype.onHideCityButtonPress = onHideCityButtonPress;
         Main.prototype.showOrders = showOrders;
+        Main.prototype.onCloseDialogButtonPress = onCloseDialogButtonPress;
 
         return Main;
     });
