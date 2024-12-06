@@ -25,65 +25,7 @@
                             <Button id="idClearFilterButton" class="sapUiSmallMarginBegin sapUiTinyMarginTop" text="{i18n>LabelBtnClearFilter}" icon="sap-icon://clear-filter" press="onClearFilterButtonPress"/>
                         </HBox>
 
-                        <HBox id="idTableHBox">
-                            <Panel id="idTablePanel">
-                                <Button id="idShowCityButton" text="{i18n>btnShowCity}" visible="{configModel>/visibleBtnShowCity}" press="onShowCityButtonPress"/>
-                                <Button id="idHideCityButton" text="{i18n>btnHideCity}" visible="{configModel>/visibleBtnHideCity}" press="onHideCityButtonPress"/>
-
-                                <Table id="idEmployeesTable" items="{employeesModel>/Employees}">
-
-                                    <!-- Colunas -->
-                                    <columns>
-                                        <!-- ID -->
-                                        <Column id="idTableIDColumn" visible="{configModel>/visibleId}">
-                                            <header>
-                                                <Label id="idIDTableLabel" text="{i18n>labelId}"/>
-                                            </header>
-                                        </Column>
-
-                                        <!-- Name -->
-                                        <Column id="idTableNameColumn" visible="{configModel>/visibleName}">
-                                            <header>
-                                                <Label id="idNameTableLabel" text="{i18n>labelName}"/>
-                                            </header>
-                                        </Column>
-
-                                        <!-- Country -->
-                                        <Column id="idTableCountryColumn" visible="{configModel>/visibleCountry}">
-                                            <header>
-                                                <Label id="idCountryTableLabel" text="{i18n>labelCountry}"/>
-                                            </header>
-                                        </Column>
-
-                                        <!-- City -->
-                                        <Column id="idTableCityColumn" visible="{configModel>/visibleCity}">
-                                            <header>
-                                                <Label id="idCityTableLabel" text="{i18n>labelCity}"/>
-                                            </header>
-                                        </Column>
-                                    </columns>
-
-                                    <!-- Linhas -->
-                                    <items>
-                                        <ColumnListItem id="idColumnListItem" type="Active" press="showOrders">
-                                            <cells>
-                                                <!-- ID -->
-                                                <Label id="idEmployeeIDItemLabel" text="{employeesModel>EmployeeID}"/>
-                                                <!-- Name -->
-                                                <Label id="idNameItemLabel" text="{employeesModel>FirstName} , {employeesModel>FirstName}"/>
-                                                <!-- Country -->
-                                                <Label id="idCountryItemLabel" text="{employeesModel>Country}"/>
-                                                <!-- City -->
-                                                <Label id="idCityItemLabel" text="{employeesModel>City}"/>
-                                            </cells>
-                                        </ColumnListItem>
-                                    </items>
-                                </Table>
-
-                                <!-- Tabela dinâmica de ordens -->
-                                <HBox id="idOrdersHBox"/>
-                            </Panel>
-                        </HBox>
+                        <core:Fragment fragmentName="logaligroup.employees.fragments.Employees" type="XML"/>
 
                     </content>
                 </Page>            
