@@ -2,6 +2,7 @@
     controllerName="logaligroup.employees.controller.Main"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:core="sap.ui.core" 
     xmlns:f="sap.f"
     displayBlock="true"
 >
@@ -10,7 +11,7 @@
             <pages>
                 <Page id="idMainPage" showHeader="false">
                     <content>
-                        <f:FlexibleColumnLayout id="idFlexibleColumnLayout" backgroundDesign="Solid" layout="OneColumn">
+                        <f:FlexibleColumnLayout id="idFlexibleColumnLayout" backgroundDesign="Solid" layout="{layoutModel>/ActiveKey}">
                             <f:beginColumnPages>
                                 <mvc:XMLView id="idEmployeeMasterXMLView" viewName="logaligroup.employees.view.EmployeeMaster" type="XML"/>
                             </f:beginColumnPages>
@@ -24,6 +25,15 @@
                             </f:endColumnPages>
                         </f:FlexibleColumnLayout>
                     </content>
+
+                    <footer>
+                        <Toolbar id="idLayoutToolbar">
+                            <Label id="idLayoutLabel" class="sapUiSmallMargin" text="{i18n>layout}"/>
+                            <Select id="idLayoutSelect" items="{layoutModel>/Layout}" selectedKey="{layoutModel>/ActiveKey}">
+                                <core:Item id="idTextLayoutItem" key="{layoutModel>Key}" text="{layoutModel>Text}"/>
+                            </Select>
+                        </Toolbar>
+                    </footer>
                 </Page>
             </pages>
         </App>

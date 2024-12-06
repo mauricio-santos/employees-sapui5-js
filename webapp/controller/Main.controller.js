@@ -29,6 +29,10 @@ sap.ui.define([
                 visibleBtnHideCity: false
             });
             oView.setModel(configModel, "configModel");
+
+            const layoutModel = new JSONModel();
+            layoutModel.loadData("./localService/mockdata/Layout.json");
+            oView.setModel(layoutModel, "layoutModel");
         };
 
         const Main = Controller.extend("logaligroup.employees.controller.Main", {});

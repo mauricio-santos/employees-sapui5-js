@@ -32,7 +32,7 @@ sap.ui.define([
             filters.push(new Filter("EmployeeID", FilterOperator.EQ, employeeId))
         }
             
-            const oList = this.getView().byId("idEmployeesTable");
+        const oList = this.getView().byId("idEmployeesTable");
         const oBindig = oList.getBinding("items");
         oBindig.filter(filters)
     },

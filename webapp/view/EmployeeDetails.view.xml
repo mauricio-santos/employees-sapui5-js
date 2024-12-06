@@ -4,7 +4,7 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core" displayBlock="true" height="100%"
 >
-	<Page id="idDetailPage">
-		<Text id="idNameText" text="{emplyees>LastName}, {emplyees>FirstName}"/>
+	<Page id="idDetailPage" title="{i18n>employeesDetailTitle}">
+		<Text id="idNameText" text="{employeesModel>LastName}, {employeesModel>FirstName}"/>
 	</Page>
 </mvc:View>
