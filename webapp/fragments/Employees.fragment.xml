@@ -32,7 +32,14 @@
                 </Column>
 
                 <!-- City -->
-                <Column id="idTableCityColumn">
+                <Column id="idTableCityColumn" visible="{configModel>/visibleCity}">
+                    <header>
+                        <Label id="idCityTableLabel" text="{i18n>labelCity}"/>
+                    </header>
+                </Column>
+
+                <!-- Show Details -->
+                <Column id="idShowDetailsColumn">
                     <header>
                         <Label id="idShowDetailsLabel" text="{i18n>labelShowDetails}"/>
                     </header>
@@ -48,8 +55,10 @@
                         <!-- Name -->
                         <Label id="idNameItemLabel" text="{employeesModel>FirstName} , {employeesModel>FirstName}"/>
                         <!-- Country -->
-                        <Label id="idCountryItemLabel" text="{employeesModel>Country}"/>
-                        <!-- CShow Details -->
+                        <Label id="idCountryItemLabel" text="{employeesModel>Country}"/>                        
+                        <!-- City -->
+                        <Label id="idCityLabel" text="{employeesModel>City}"/>
+                        <!-- Show Details -->
                         <core:Icon id="idDetailsIcon" src="sap-icon://show" press="showOrders"/>
                     </cells>
                 </ColumnListItem>
