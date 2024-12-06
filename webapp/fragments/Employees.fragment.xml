@@ -32,16 +32,16 @@
                 </Column>
 
                 <!-- City -->
-                <Column id="idTableCityColumn" visible="{configModel>/visibleCity}">
+                <Column id="idTableCityColumn">
                     <header>
-                        <Label id="idCityTableLabel" text="{i18n>labelCity}"/>
+                        <Label id="idShowDetailsLabel" text="{i18n>labelShowDetails}"/>
                     </header>
                 </Column>
             </columns>
 
             <!-- Linhas -->
             <items>
-                <ColumnListItem id="idColumnListItem" type="Active" press="showOrders">
+                <ColumnListItem id="idColumnListItem">
                     <cells>
                         <!-- ID -->
                         <Label id="idEmployeeIDItemLabel" text="{employeesModel>EmployeeID}"/>
@@ -49,8 +49,8 @@
                         <Label id="idNameItemLabel" text="{employeesModel>FirstName} , {employeesModel>FirstName}"/>
                         <!-- Country -->
                         <Label id="idCountryItemLabel" text="{employeesModel>Country}"/>
-                        <!-- City -->
-                        <Label id="idCityItemLabel" text="{employeesModel>City}"/>
+                        <!-- CShow Details -->
+                        <core:Icon id="idDetailsIcon" src="sap-icon://show" press="showOrders"/>
                     </cells>
                 </ColumnListItem>
             </items>
