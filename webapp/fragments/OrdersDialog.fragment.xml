@@ -3,40 +3,42 @@
 	xmlns:core="sap.ui.core"
 >
     <Dialog id="idOrdersDialog" title="{i18n>orders}">
-        <Table id="idOrdersTable" items="{employeesModel>Orders}" width="700px">
-            <columns>
-                <Column id="idOrderIDColumn">
-                    <header>
-                        <Label id="idOrderIDLabel" text="{i18n>orderID}"/>
-                    </header>
-                </Column>
+        <content>
+            <Table id="idOrdersTable" items="{employeesModel>Orders}" width="700px">
+                <columns>
+                    <Column id="idOrderIDColumn">
+                        <header>
+                            <Label id="idOrderIDLabel" text="{i18n>orderID}"/>
+                        </header>
+                    </Column>
 
-                <Column id="idFreightColumn">
-                    <header>
-                        <Label id="idFreightLabel" text="{i18n>freight}"/>
-                    </header>
-                </Column>
+                    <Column id="idFreightColumn">
+                        <header>
+                            <Label id="idFreightLabel" text="{i18n>freight}"/>
+                        </header>
+                    </Column>
 
-                <Column id="idShipAddressColumn">
-                    <header>
-                        <Label id="idShipAddressLabel" text="{i18n>shipAddress}"/>
-                    </header>
-                </Column>
-            </columns>
+                    <Column id="idShipAddressColumn">
+                        <header>
+                            <Label id="idShipAddressLabel" text="{i18n>shipAddress}"/>
+                        </header>
+                    </Column>
+                </columns>
 
-            <items>
-                <ColumnListItem id="idOrdersColumnListItem">
-                    <cells>
-                        <Label id="idOrderIDItemLabel" text="{employeesModel>orderID}"/>
-                        <Label id="idFreightItemLabel" text="{employeesModel>Freight}"/>
-                        <Label id="idShipAddressEtemLabel" text="{employeesModel>ShipAddress}"/>
-                    </cells>
-                </ColumnListItem>
-            </items>
-        </Table>
+                <items>
+                    <ColumnListItem id="idOrdersColumnListItem">
+                        <cells>
+                            <Label id="idOrderIDItemLabel" text="{employeesModel>OrderID}"/>
+                            <Label id="idFreightItemLabel" text="{employeesModel>Freight}"/>
+                            <Label id="idShipAddressEtemLabel" text="{employeesModel>ShipAddress}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
 
         <endButton>
-            <Button id="idCloseDialogButton" press="onCloseDialogButtonPress"/>
+            <Button id="idCloseDialogButton" text="{i18n>close}" press="onCloseDialogButtonPress"/>
         </endButton>
     </Dialog>
 </core:FragmentDefinition>
