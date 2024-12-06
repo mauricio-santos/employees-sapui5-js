@@ -1,0 +1,31 @@
+<mvc:View 
+    controllerName="logaligroup.employees.controller.Main"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:f="sap.f"
+    displayBlock="true"
+>
+    <Shell id="idShell">
+        <App id="app">
+            <pages>
+                <Page id="idMainPage" showHeader="false">
+                    <content>
+                        <f:FlexibleColumnLayout id="idFlexibleColumnLayout" backgroundDesign="Solid" layout="OneColumn">
+                            <f:beginColumnPages>
+                                <mvc:XMLView id="idEmployeeMasterXMLView" viewName="logaligroup.employees.view.EmployeeMaster" type="XML"/>
+                            </f:beginColumnPages>
+
+                            <f:midColumnPages>
+                                <mvc:XMLView id="idEmployeeDatailsXMLView" viewName="logaligroup.employees.view.EmployeeDetails" type="XML"/>
+                            </f:midColumnPages>
+
+                            <f:endColumnPages>
+                                <Page id="idPage"></Page>
+                            </f:endColumnPages>
+                        </f:FlexibleColumnLayout>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

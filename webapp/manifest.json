@@ -91,22 +91,29 @@
           "name": "RouteMainView",
           "pattern": "?home",
           "target": [
-            "TargetMainView"
+            "TargetMain"
           ]
         }
       ],
       "targets": {
-        "TargetMainView": {
+        "TargetMain": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "MainView",
-          "viewName": "MainView"
+          "viewId": "Main",
+          "viewName": "Main"
+        },
+        "TargetEmployeeMaster": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "EmpoyeeMaster",
+          "viewName": "EmpoyeeMaster"
         }
       }
     },
     "rootView": {
-      "viewName": "logaligroup.employees.view.MainView",
+      "viewName": "logaligroup.employees.view.Main",
       "type": "XML",
       "async": true,
       "id": "App"
