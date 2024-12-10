@@ -23,7 +23,7 @@
 				<Button id="idClearFilterButton" class="sapUiSmallMarginBegin sapUiTinyMarginTop" text="{i18n>LabelBtnClearFilter}" icon="sap-icon://clear-filter" press="onClearFilterButtonPress"/>
 			</HBox>
 
-			<core:Fragment fragmentName="logaligroup.employees.fragments.Employees" type="XML"/>
+			<core:Fragment fragmentName="logaligroup.employees.fragments.TableEmployees" type="XML"/>
 
 		</content>
 	</Page>   

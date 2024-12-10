@@ -48,7 +48,7 @@
 
             <!-- Linhas -->
             <items>
-                <ColumnListItem id="idColumnListItem">
+                <ColumnListItem id="idColumnListItem" type="Navigation" press="onColumnListItemPress">
                     <cells>
                         <!-- ID -->
                         <Label id="idEmployeeIDItemLabel" text="{employeesModel>EmployeeID}"/>

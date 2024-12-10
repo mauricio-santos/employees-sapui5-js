@@ -9,33 +9,32 @@ sap.ui.define([
     function (Controller, JSONModel) {
         "use strict";
 
-        function onInit() {
-            const oView = this.getView();
+        return Controller.extend("logaligroup.employees.controller.Main", {
 
-            const employeesModel = new JSONModel();
-            employeesModel.loadData("./localService/mockdata/Employees.json");
-            oView.setModel(employeesModel, "employeesModel");
-            
-            const countriesModel = new JSONModel();
-            countriesModel.loadData("./localService/mockdata/Countries.json");
-            oView.setModel(countriesModel, "countriesModel");
+            onInit: function () {
+                const oView = this.getView();
 
-            const configModel = new JSONModel({
-                visibleId: true,
-                visibleName: true,
-                visibleCountry: true,
-                visibleCity: false,
-                visibleBtnShowCity: true,
-                visibleBtnHideCity: false
-            });
-            oView.setModel(configModel, "configModel");
+                const employeesModel = new JSONModel();
+                employeesModel.loadData("./localService/mockdata/Employees.json");
+                oView.setModel(employeesModel, "employeesModel");
 
-            const layoutModel = new JSONModel();
-            layoutModel.loadData("./localService/mockdata/Layout.json");
-            oView.setModel(layoutModel, "layoutModel");
-        };
+                const countriesModel = new JSONModel();
+                countriesModel.loadData("./localService/mockdata/Countries.json");
+                oView.setModel(countriesModel, "countriesModel");
 
-        const Main = Controller.extend("logaligroup.employees.controller.Main", {});
-        Main.prototype.onInit = onInit;
-        return Main;
+                const configModel = new JSONModel({
+                    visibleId: true,
+                    visibleName: true,
+                    visibleCountry: true,
+                    visibleCity: false,
+                    visibleBtnShowCity: true,
+                    visibleBtnHideCity: false
+                });
+                oView.setModel(configModel, "configModel");
+
+                const layoutModel = new JSONModel();
+                layoutModel.loadData("./localService/mockdata/Layout.json");
+                oView.setModel(layoutModel, "layoutModel");
+            }
+        });
     });

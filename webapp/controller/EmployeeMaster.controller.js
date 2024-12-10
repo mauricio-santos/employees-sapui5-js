@@ -13,31 +13,30 @@ sap.ui.define([
     function (Controller, Filter, FilterOperator, Fragment) {
         "use strict";
 
-	return Controller.extend("logaligroup.employees.controller.EmployeeMaster", {
-        onInit: function() {
+        function onInit() {
 
-        },
+        };
 
-        onFilterButtonPress: function () {
-        const oJSON = this.getView().getModel("countriesModel").getData();
-        const countryKey = oJSON.CountryKey;
-        const employeeId = oJSON.EmployeeId;
-        const filters = [];
+        function onFilterButtonPress() {
+            const oJSON = this.getView().getModel("countriesModel").getData();
+            const countryKey = oJSON.CountryKey;
+            const employeeId = oJSON.EmployeeId;
+            const filters = [];
 
-        if(countryKey) {
-            filters.push(new Filter("Country", FilterOperator.EQ, countryKey))
-        }
-            
+            if(countryKey) {
+                filters.push(new Filter("Country", FilterOperator.EQ, countryKey))
+            } 
+
             if(employeeId) {
-            filters.push(new Filter("EmployeeID", FilterOperator.EQ, employeeId))
-        }
-            
-        const oList = this.getView().byId("idEmployeesTable");
-        const oBindig = oList.getBinding("items");
-        oBindig.filter(filters)
-    },
+                filters.push(new Filter("EmployeeID", FilterOperator.EQ, employeeId))
+            }
+                
+            const oList = this.getView().byId("idEmployeesTable");
+            const oBindig = oList.getBinding("items");
+            oBindig.filter(filters)
+        };
 
-        onClearFilterButtonPress: function () {
+        function onClearFilterButtonPress() {
             const oModel = this.getView().getModel("countriesModel");
             oModel.setProperty("/EmployeeId", "");
             oModel.setProperty("/CountryKey", "");
@@ -46,23 +45,23 @@ sap.ui.define([
             const oBindig = oList.getBinding("items");
             oBindig.filter([])
 
-        },
+        };
 
-        onShowCityButtonPress: function () {
+        function onShowCityButtonPress() {
             const model = this.getView().getModel("configModel");
             model.setProperty("/visibleCity", true);
             model.setProperty("/visibleBtnShowCity", false);
             model.setProperty("/visibleBtnHideCity", true);
-        },
+        };
 
-        onHideCityButtonPress: function() {
+        function onHideCityButtonPress() {
             const model = this.getView().getModel("configModel");
             model.setProperty("/visibleCity", false);
             model.setProperty("/visibleBtnShowCity", true);
             model.setProperty("/visibleBtnHideCity", false);
-        },
+        };
 
-        showOrders: function(event) {
+        function showOrders(event) {
             const iconPress = event.getSource();
             const oContext = iconPress.getBindingContext("employeesModel");
             const oView = this.getView();
@@ -72,23 +71,33 @@ sap.ui.define([
                     name: "logaligroup.employees.fragments.OrdersDialog",
                     id: oView.getId(),
                     controller: this
-                }).then(function (oDialog) {
+                })
+                .then(function (oDialog) {
                     oView.addDependent(oDialog);
                     oDialog.bindElement({
                         model: "employeesModel",
                         path: oContext.getPath()
                     })
                     oDialog.open();
-                }).catch(e => console.log(e));
+                })
+                .catch(e => console.log(e));
             } else {
                 this.byId("idOrdersDialog").open();
             }
-        },
+        };
 
-        onCloseDialogButtonPress: function() {
+        function onCloseDialogButtonPress() {
             this.byId("idOrdersDialog").close();
-        }
+        };
 
-        
-	});
-});
+        const Main = Controller.extend("logaligroup.employees.controller.EmployeeMaster", {});
+        Main.prototype.onInit = onInit;
+        Main.prototype.onFilterButtonPress = onFilterButtonPress;
+        Main.prototype.onClearFilterButtonPress = onClearFilterButtonPress;
+        Main.prototype.onShowCityButtonPress = onShowCityButtonPress;
+        Main.prototype.onHideCityButtonPress = onHideCityButtonPress;
+        Main.prototype.showOrders = showOrders;
+        Main.prototype.onCloseDialogButtonPress = onCloseDialogButtonPress;
+        return Main;
+	}
+);
