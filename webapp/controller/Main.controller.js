@@ -35,6 +35,19 @@ sap.ui.define([
                 const layoutModel = new JSONModel();
                 layoutModel.loadData("./localService/mockdata/Layout.json");
                 oView.setModel(layoutModel, "layoutModel");
+
+                //Obtendo o Event Bus
+                const oEventBus = sap.ui.getCore().getEventBus();
+                //increvendo-se ao Canal EmployeeChanel do evento EmployeeSelected
+                oEventBus.subscribe("EmployeeChanel", "SelectedEmployee", this.employeeSelected, this);
+            },
+
+            employeeSelected: function (sChanel, sEvent, oData) {
+                const detailsView = this.getView().byId("idEmployeeDatailsXMLView");
+                const pathEmployee = oData.getPath();
+                
+                detailsView.bindElement("employeesModel>" + pathEmployee);
+                this.getView().getModel("layoutModel").setProperty("/ActiveKey", "TwoColumnsBeginExpanded");
             }
         });
     });

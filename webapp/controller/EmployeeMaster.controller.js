@@ -90,6 +90,16 @@ sap.ui.define([
             this.byId("idOrdersDialog").close();
         };
 
+        function onColumnListItemPress(event) {
+            const selectedItem = event.getSource();
+            const oContext = selectedItem.getBindingContext("employeesModel");
+            
+            //Obtendo o evento
+            const oEventBus = sap.ui.getCore().getEventBus();
+            //Publicando evento SelectedEmployee no canal EmployeeChanel e enviando oContext como parâmetro
+            oEventBus.publish("EmployeeChanel", "SelectedEmployee", oContext);
+        }
+
         const Main = Controller.extend("logaligroup.employees.controller.EmployeeMaster", {});
         Main.prototype.onInit = onInit;
         Main.prototype.onFilterButtonPress = onFilterButtonPress;
@@ -98,6 +108,7 @@ sap.ui.define([
         Main.prototype.onHideCityButtonPress = onHideCityButtonPress;
         Main.prototype.showOrders = showOrders;
         Main.prototype.onCloseDialogButtonPress = onCloseDialogButtonPress;
+        Main.prototype.onColumnListItemPress = onColumnListItemPress;
         return Main;
 	}
 );
