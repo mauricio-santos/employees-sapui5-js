@@ -1,45 +1,20 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/ui/core/Fragment"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller 
-     * @param {typeof sap.ui.model.json.JSONModel} JSONModel 
      * @param {typeof sap.ui.model.Filter} Filter 
      * @param {typeof sap.ui.model.FilterOperator} FilterOperator 
      * @param {typeof sap.ui.core.Fragment} Fragment 
      */
-    function (Controller, JSONModel, Filter, FilterOperator, Fragment) {
+    function (Controller, Filter, FilterOperator, Fragment) {
         "use strict";
 
         function onInit() {
-            const oView = this.getView();
 
-            const employeesModel = new JSONModel();
-            employeesModel.loadData("./localService/mockdata/Employees.json");
-            oView.setModel(employeesModel, "employeesModel");
-            
-            const countriesModel = new JSONModel();
-            countriesModel.loadData("./localService/mockdata/Countries.json");
-            oView.setModel(countriesModel, "countriesModel");
-
-            //Chamada assíncrona. Função é Executada quando o modelo é carrregado
-            // oJSONModel.attachRequestCompleted(function(oEventModel) {
-            //     console.log(JSON.stringify(oJSONModel.getData()));
-            // })
-
-            const configModel = new JSONModel({
-                visibleId: true,
-                visibleName: true,
-                visibleCountry: true,
-                visibleCity: false,
-                visibleBtnShowCity: true,
-                visibleBtnHideCity: false
-            });
-            oView.setModel(configModel, "configModel");
         };
 
         function onFilterButtonPress() {
@@ -48,14 +23,14 @@ sap.ui.define([
             const employeeId = oJSON.EmployeeId;
             const filters = [];
 
-            if (countryKey){
+            if(countryKey) {
                 filters.push(new Filter("Country", FilterOperator.EQ, countryKey))
-            }
-            
-            if (employeeId){
+            } 
+
+            if(employeeId) {
                 filters.push(new Filter("EmployeeID", FilterOperator.EQ, employeeId))
             }
-            
+                
             const oList = this.getView().byId("idEmployeesTable");
             const oBindig = oList.getBinding("items");
             oBindig.filter(filters)
@@ -69,7 +44,7 @@ sap.ui.define([
             const oList = this.getView().byId("idEmployeesTable");
             const oBindig = oList.getBinding("items");
             oBindig.filter([])
-            
+
         };
 
         function onShowCityButtonPress() {
@@ -88,32 +63,44 @@ sap.ui.define([
 
         function showOrders(event) {
             const iconPress = event.getSource();
-            const oContext = iconPress.getBindingContext("employeesModel");      
+            const oContext = iconPress.getBindingContext("employeesModel");
             const oView = this.getView();
-            
+
             if (!this.byId("idOrdersDialog")) {
                 Fragment.load({
                     name: "logaligroup.employees.fragments.OrdersDialog",
                     id: oView.getId(),
                     controller: this
-                }).then(function (oDialog) {
+                })
+                .then(function (oDialog) {
                     oView.addDependent(oDialog);
                     oDialog.bindElement({
                         model: "employeesModel",
-                        path: oContext.getPath()    
+                        path: oContext.getPath()
                     })
                     oDialog.open();
-                }).catch(e => console.log(e));
+                })
+                .catch(e => console.log(e));
             } else {
                 this.byId("idOrdersDialog").open();
-            } 
+            }
         };
-        
+
         function onCloseDialogButtonPress() {
             this.byId("idOrdersDialog").close();
+        };
+
+        function onColumnListItemPress(event) {
+            const selectedItem = event.getSource();
+            const oContext = selectedItem.getBindingContext("employeesModel");
+            
+            //Obtendo o evento
+            const oEventBus = sap.ui.getCore().getEventBus();
+            //Publicando evento SelectedEmployee no canal EmployeeChanel e enviando oContext como parâmetro
+            oEventBus.publish("EmployeeChanel", "SelectedEmployee", oContext);
         }
 
-        const Main = Controller.extend("logaligroup.employees.controller.MainView", {});
+        const Main = Controller.extend("logaligroup.employees.controller.EmployeeMaster", {});
         Main.prototype.onInit = onInit;
         Main.prototype.onFilterButtonPress = onFilterButtonPress;
         Main.prototype.onClearFilterButtonPress = onClearFilterButtonPress;
@@ -121,6 +108,7 @@ sap.ui.define([
         Main.prototype.onHideCityButtonPress = onHideCityButtonPress;
         Main.prototype.showOrders = showOrders;
         Main.prototype.onCloseDialogButtonPress = onCloseDialogButtonPress;
-
+        Main.prototype.onColumnListItemPress = onColumnListItemPress;
         return Main;
-    });
+	}
+);

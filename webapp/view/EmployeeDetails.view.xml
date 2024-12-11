@@ -1,0 +1,64 @@
+<mvc:View 
+	controllerName="logaligroup.employees.controller.EmployeeDetails"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core" 
+	displayBlock="true"
+	height="100%"
+>
+	<Page id="idDetailPage" title="{i18n>employeesDetailTitle}">
+		<Panel id="idDetailsPanel">
+
+			<FlexBox id="idCenterFlexBox" height="65px" alignItems="Center" justifyContent="Center" >
+				<items>
+					<Text id="idNameText" class="boldText" text="{employeesModel>LastName}, {employeesModel>FirstName}"/>
+				</items>
+			</FlexBox>
+
+			<FlexBox id="idSpaceBetweenFlexBox" height="65px" alignItems="Center" justifyContent="SpaceBetween">
+				<items>
+					<VBox id="idEmployeeIdVBox">
+						<Text id="idEmployeeIDLabelText" class="boldText sapUiTinyMarginEnd" text="{i18n>employeeId}"/>
+						<Text id="idEmployeeIDText" class="boldText" text="{employeesModel>EmployeeID}"/>
+					</VBox>
+
+					<VBox id="idEmployeeTitleVBox">
+						<items>
+							<Text id="idTitleEmployeeLabelText" text="{i18n>titleEmployee}" class="boldText"/>
+							<Text id="idTitleEmployeeText" text="{employeesModel>Title}" class="boldText"/>
+						</items>
+					</VBox>
+				</items>
+			</FlexBox>
+
+			<FlexBox id="idHorizontalFlexBox" alignItems="Start">
+				<items>
+					<HBox id="idCountryHBox">
+						<Text id="idCountryCodeText" class="boldText sapUiTinyMarginEnd" text="{i18n>countryCode}"/>
+						<Text id="idCountryText" text="{employeesModel>Country}"/>
+						<layoutData>
+							<FlexItemData id="idCountryFlexItemData" growFactor="3"/>
+						</layoutData>
+					</HBox>
+
+					<HBox id="idCityHBox">
+						<Text id="idCityLabelText" class="boldText sapUiTinyMarginEnd" text="{i18n>city}"/>
+						<Text id="idCityText" text="{employeesModel>City}"/>
+						<layoutData>
+							<FlexItemData id="idCityFlexItemData" growFactor="2"/>
+						</layoutData>
+					</HBox>
+					
+					<FlexBox id="idPostalCodeFlexBox">
+						<Text id="idPostalCodeLabelText" class="boldText sapUiTinyMarginEnd" text="{i18n>postalCode}"/>
+						<Text id="idPostalCodeText" text="{employeesModel>PostalCode}"/>
+						<layoutData>
+							<FlexItemData id="idPostalFlexItemData" growFactor="1"/>
+						</layoutData>
+					</FlexBox>
+				</items>
+			</FlexBox>
+
+		</Panel>
+	</Page>
+</mvc:View>
