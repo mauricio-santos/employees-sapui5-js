@@ -47,7 +47,7 @@ sap.ui.define([
                 const pathEmployee = oData.getPath();
                 
                 detailsView.bindElement("employeesModel>" + pathEmployee);
-                this.getView().getModel("layoutModel").setProperty("/ActiveKey", "TwoColumnsBeginExpanded");
+                this.getView().getModel("layoutModel").setProperty("/ActiveKey", "TwoColumnsMidExpanded");
             }
         });
     });
