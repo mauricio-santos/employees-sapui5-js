@@ -48,6 +48,13 @@ sap.ui.define([
                 
                 detailsView.bindElement("employeesModel>" + pathEmployee);
                 this.getView().getModel("layoutModel").setProperty("/ActiveKey", "TwoColumnsMidExpanded");
+
+                //Criando modelo para incidências
+                const incidenceModel = new JSONModel([]);
+                detailsView.setModel(incidenceModel, "incidenceModel");
+                
+                // Limpando incidências ao clicar em outro ítem
+                detailsView.byId("idTableIncidencePanel").removeAllContent();
             }
         });
     });

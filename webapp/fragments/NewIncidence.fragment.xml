@@ -1,0 +1,8 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+<Panel id="idPanel">
+	<Text id="idIndexText" text="{incidenceModel>index}"/>
+</Panel>
+</core:FragmentDefinition>
