@@ -22,8 +22,9 @@ sap.ui.define([
             oData.push({ index: lastIndex + 1 });
             incidenceModel.refresh();
             
-            this._newIncidence ??= Fragment.load({
-                name: "logaligroup.employees.fragments.NewIncidence"
+            this._newIncidence = Fragment.load({
+                name: "logaligroup.employees.fragments.NewIncidence",
+                id: "fragIncidencesId" + lastIndex
             })
             this._newIncidence.then(function (frag) {
                 frag.bindElement({
@@ -31,7 +32,7 @@ sap.ui.define([
                     path: "incidenceModel>/" + lastIndex
                 });
                 tableIncidence.addContent(frag);
-            })
+            })            
         };
 
         const EmployeeDetails = Controller.extend("logaligroup.employees.controller.EmployeeDetails", {});
