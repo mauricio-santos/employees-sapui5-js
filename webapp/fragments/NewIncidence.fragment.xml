@@ -5,7 +5,10 @@
 	<Panel id="idPanel">
 		<headerToolbar>
 			<Toolbar id="idStatusToolbar">
-				<Title id="idStatusTitle" text="{i18n>incidenceTitle} {incidenceModel>index}"/>
+				<Title id="idStatusTitle" 
+					text="{i18n>incidenceTitle} {incidenceModel>index} {path:'incidenceModel>date', formatter:'.Formatter.dateFormat'}"
+				/>
+				<ToolbarSpacer id="idStatusToolbarSpacer"/>
 				<core:Icon id="idStatusIcon"
 					src="{= ${incidenceModel>status} === '0' ? 'accept' :
 							${incidenceModel>status} === '1' ? 'alert' :
@@ -18,7 +21,7 @@
 			<HBox id="idHBox">
 				<VBox id="idDateVBox" class="sapUiSmallMarginEnd">
 					<Text id="idDateText" text="{i18n>incidanceDate}"/>
-					<DatePicker id="idDateDatePicker" value="{incidenceModel>date}"/>
+					<DatePicker id="idDateDatePicker" dateValue="{incidenceModel>date}"/>
 				</VBox>
 
 				<VBox id="idReasonVBox" class="sapUiSmallMarginEnd" 

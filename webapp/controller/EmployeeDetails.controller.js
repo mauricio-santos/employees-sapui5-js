@@ -1,12 +1,13 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/core/Fragment"
+    "sap/ui/core/Fragment",
+    "logaligroup/employees/model/formatter"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller 
      * @param {typeof sap.ui.core.Fragment} Fragment 
      */
-    function (Controller, Fragment) {
+    function (Controller, Fragment, formatter) {
         "use strict";
 
         function onInit() {
@@ -24,7 +25,8 @@ sap.ui.define([
             
             this._newIncidence = Fragment.load({
                 name: "logaligroup.employees.fragments.NewIncidence",
-                id: "fragIncidencesId" + lastIndex
+                id: "fragIncidenceId" + lastIndex,
+                controller: this //Se o controller não for passado, a função dataFormat não executará
             })
             this._newIncidence.then(function (frag) {
                 frag.bindElement({
@@ -38,6 +40,7 @@ sap.ui.define([
         const EmployeeDetails = Controller.extend("logaligroup.employees.controller.EmployeeDetails", {});
         EmployeeDetails.prototype.onInit = onInit;
         EmployeeDetails.prototype.onCreateIncidenceButtonPress = onCreateIncidenceButtonPress;
+        EmployeeDetails.prototype.Formatter = formatter;
         return EmployeeDetails;
     }
 );
