@@ -69,9 +69,7 @@
 				</Toolbar>
 			</headerToolbar>
 
-			<Panel id="idTableIncidencePanel" class="sapUiNoContentPadding" backgroundDesign="Transparent">
-			
-			</Panel>
+			<Panel id="idTableIncidencePanel" class="sapUiNoContentPadding" backgroundDesign="Transparent"/>
 			
 		</Panel>
 	</Page>

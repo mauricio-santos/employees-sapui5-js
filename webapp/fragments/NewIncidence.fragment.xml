@@ -2,19 +2,20 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
 >
-	<Panel id="idPanel">
+	<Panel id="idFragmentIncidencePanel">
 		<headerToolbar>
 			<Toolbar id="idStatusToolbar">
+				<core:Icon id="idStatusIcon" 
+					src="{= ${incidenceModel>status} === '0' ? 'sap-icon://accept' :
+							${incidenceModel>status} === '1' ? 'sap-icon://alert' :
+							${incidenceModel>status} === '2' ? 'sap-icon://decline' : ''
+						}" 
+				/>
 				<Title id="idStatusTitle" 
 					text="{i18n>incidenceTitle} {incidenceModel>index} {path:'incidenceModel>date', formatter:'.Formatter.dateFormat'}"
 				/>
 				<ToolbarSpacer id="idStatusToolbarSpacer"/>
-				<core:Icon id="idStatusIcon"
-					src="{= ${incidenceModel>status} === '0' ? 'accept' :
-							${incidenceModel>status} === '1' ? 'alert' :
-							${incidenceModel>status} === '2' ? 'decline' : ''
-						}"
-				/>
+				<core:Icon id="idDeleteIcon" src="sap-icon://delete" press="onIconDeletePress"/>
 			</Toolbar>
 		</headerToolbar>
 		<content>
