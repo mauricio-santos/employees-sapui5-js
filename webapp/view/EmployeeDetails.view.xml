@@ -58,7 +58,19 @@
 					</FlexBox>
 				</items>
 			</FlexBox>
+		</Panel>
 
+		<Panel id="idIncidencesPanel" class="sapUiSizeCompact" backgroundDesign="Transparent">
+			<headerToolbar>
+				<Toolbar id="idIncidencesToolbar">
+					<Title id="idIncidenceTitle" text="{i18n>incidenceTitle} {= ${employeesModel>Country} !== 'US' ? ${i18n>europe} : ${i18n>nothAmerica}}"/>
+					<ToolbarSpacer id="idToolbarSpacer"/>
+					<Button id="idCreateIncidenceButton" text="{i18n>createIncidence}" press="onCreateIncidenceButtonPress"/>
+				</Toolbar>
+			</headerToolbar>
+
+			<Panel id="idTableIncidencePanel" class="sapUiNoContentPadding" backgroundDesign="Transparent"/>
+			
 		</Panel>
 	</Page>
 </mvc:View>

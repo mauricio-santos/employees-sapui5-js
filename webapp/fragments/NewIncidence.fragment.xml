@@ -1,0 +1,48 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<Panel id="idFragmentIncidencePanel">
+		<headerToolbar>
+			<Toolbar id="idStatusToolbar">
+				<core:Icon id="idStatusIcon" 
+					src="{= ${incidenceModel>status} === '0' ? 'sap-icon://accept' :
+							${incidenceModel>status} === '1' ? 'sap-icon://alert' :
+							${incidenceModel>status} === '2' ? 'sap-icon://decline' : ''
+						}" 
+				/>
+				<Title id="idStatusTitle" 
+					text="{i18n>incidenceTitle} {incidenceModel>index} {path:'incidenceModel>date', formatter:'.Formatter.dateFormat'}"
+				/>
+				<ToolbarSpacer id="idStatusToolbarSpacer"/>
+				<core:Icon id="idDeleteIcon" src="sap-icon://delete" press="onIconDeletePress"/>
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<HBox id="idHBox">
+				<VBox id="idDateVBox" class="sapUiSmallMarginEnd">
+					<Text id="idDateText" text="{i18n>incidanceDate}"/>
+					<DatePicker id="idDateDatePicker" dateValue="{incidenceModel>date}"/>
+				</VBox>
+
+				<VBox id="idReasonVBox" class="sapUiSmallMarginEnd" 
+					visible="{= ${incidenceModel>date} !== '' &amp;&amp; ${incidenceModel>date} !== undefined }"
+				>
+					<Text id="idReasonText" text="{i18n>incidenceReason}"/>
+					<Input id="idReasonInput"/>
+				</VBox>
+
+				<VBox id="idStatusVBox" 
+					visible="{= ${incidenceModel>date} !== '' &amp;&amp; ${incidenceModel>date} !== undefined }"
+				>
+					<Text id="idTypeText" text="{i18n>incidenceType}"/>
+					<Select id="idStatusSelect" selectedKey="{incidenceModel>status}" forceSelection="false">
+						<core:Item id="idCorrectItem" key="0" text="{i18n>incidenceCorrect}"/>
+						<core:Item id="idPendingItem" key="1" text="{i18n>incidencePending}"/>
+						<core:Item id="idErrorItem" key="2" text="{i18n>incidenceError}"/>
+					</Select>
+				</VBox>
+			</HBox>
+		</content>
+	</Panel>
+</core:FragmentDefinition>
