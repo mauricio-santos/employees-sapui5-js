@@ -16,12 +16,12 @@
       "toolsId": "f84e1b2e-db63-436a-a01a-80d928f4bb90"
     },
     "dataSources": {
-      "mainService": {
+      "Northwind.svc": {
         "uri": "/V2/Northwind/Northwind.svc/",
         "type": "OData",
         "settings": {
           "annotations": [],
-          "localUri": "localService/metadata.xml",
+          "localUri": "localService/Northwind/metadata.xml",
           "odataVersion": "2.0"
         }
       }
@@ -64,9 +64,14 @@
         }
       },
       "northwindModel": {
-        "dataSource": "mainService",
+        "dataSource": "Northwind.svc",
         "preload": true,
-        "settings": {}
+        "settings": {
+          "defaultOperationMode": "Server",
+          "defaultBindingMode": "OneWay",
+          "defaultCountMode": "Request",
+          "refreshAfterChange": false
+        }
       }
     },
     "resources": {

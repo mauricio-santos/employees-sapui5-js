@@ -46,7 +46,7 @@ sap.ui.define([
                 const detailsView = this.getView().byId("idEmployeeDatailsXMLView");
                 const pathEmployee = oData.getPath();
                 
-                detailsView.bindElement("employeesModel>" + pathEmployee);
+                detailsView.bindElement("northwindModel>" + pathEmployee);
                 this.getView().getModel("layoutModel").setProperty("/ActiveKey", "TwoColumnsMidExpanded");
 
                 //Criando modelo para incidências

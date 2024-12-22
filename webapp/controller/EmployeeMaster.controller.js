@@ -63,7 +63,7 @@ sap.ui.define([
 
         function showOrders(event) {
             const iconPress = event.getSource();
-            const oContext = iconPress.getBindingContext("employeesModel");
+            const oContext = iconPress.getBindingContext("northwindModel");
             const oView = this.getView();
 
             if (!this.byId("idOrdersDialog")) {
@@ -75,7 +75,7 @@ sap.ui.define([
                 .then(function (oDialog) {
                     oView.addDependent(oDialog);
                     oDialog.bindElement({
-                        model: "employeesModel",
+                        model: "northwindModel",
                         path: oContext.getPath()
                     })
                     oDialog.open();
@@ -92,7 +92,7 @@ sap.ui.define([
 
         function onColumnListItemPress(event) {
             const selectedItem = event.getSource();
-            const oContext = selectedItem.getBindingContext("employeesModel");
+            const oContext = selectedItem.getBindingContext("northwindModel");
             
             //Obtendo o evento
             const oEventBus = sap.ui.getCore().getEventBus();
