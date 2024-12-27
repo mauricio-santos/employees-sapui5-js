@@ -15,6 +15,7 @@
 					text="{i18n>incidenceTitle} {incidenceModel>IncidenceId} {path:'incidenceModel>CreationDate', formatter:'.Formatter.dateFormat'}"
 				/>
 				<ToolbarSpacer id="idStatusToolbarSpacer"/>
+				<Button id="idSaveButton" icon="sap-icon://save" press="onSaveButtonPress"/>
 				<core:Icon id="idDeleteIcon" src="sap-icon://delete" press="onIconDeletePress"/>
 			</Toolbar>
 		</headerToolbar>
@@ -35,7 +36,7 @@
 				<VBox id="idStatusVBox" 
 					visible="{= ${incidenceModel>CreationDate} !== '' &amp;&amp; ${incidenceModel>CreationDate} !== undefined }"
 				>
-					<Text id="idTypeText" text="{i18n>incidenceType}"/>
+					<Text id="idTypeText" text="{i18n>incidenceType}"/> 
 					<Select id="idStatusSelect" selectedKey="{incidenceModel>Type}" forceSelection="false">
 						<core:Item id="idCorrectItem" key="0" text="{i18n>incidenceCorrect}"/>
 						<core:Item id="idPendingItem" key="1" text="{i18n>incidencePending}"/>

@@ -11,7 +11,7 @@ sap.ui.define([
         "use strict";
 
         function onInit() {
-
+            
         };
 
         function onCreateIncidenceButtonPress() {
@@ -72,6 +72,17 @@ sap.ui.define([
             tableIncidence.getContent().forEach((row, index) => {
                 row.bindElement("incidenceModel>/" + index)
             });  
+        };
+
+        function onSaveButtonPress(event) {
+            const fragmentInstance = event.getSource().getParent().getParent(); // O avô do evento
+            const oBindingContext = fragmentInstance.getBindingContext("incidenceModel");
+            const incidenceIndex = oBindingContext.sPath.replace("/", '');
+            
+            //Instanciando o EventBus
+            const oEventBus = sap.ui.getCore().getEventBus();
+            //Publicando evento
+            oEventBus.publish("IncidenceChanel", "SelectedIncidenceIndex", {index: incidenceIndex});
         }
 
         const EmployeeDetails = Controller.extend("logaligroup.employees.controller.EmployeeDetails", {});
@@ -79,6 +90,7 @@ sap.ui.define([
         EmployeeDetails.prototype.onCreateIncidenceButtonPress = onCreateIncidenceButtonPress;
         EmployeeDetails.prototype.Formatter = formatter;
         EmployeeDetails.prototype.onIconDeletePress = onIconDeletePress;
+        EmployeeDetails.prototype.onSaveButtonPress = onSaveButtonPress;
         return EmployeeDetails;
     }
 );
