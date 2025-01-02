@@ -22,14 +22,14 @@
 		<content>
 			<HBox id="idHBox">
 				<VBox id="idDateVBox" class="sapUiSmallMarginEnd">
-					<Text id="idDateText" text="{i18n>incidanceDate}"/>
+					<Label id="idDateLabel" text="{i18n>incidanceDate}" required="true"/>
 					<DatePicker id="idDateDatePicker" dateValue="{incidenceModel>CreationDate}" change="onDatePickerChange"/>
 				</VBox>
 
 				<VBox id="idReasonVBox" class="sapUiSmallMarginEnd" 
 					visible="{= ${incidenceModel>CreationDate} !== '' &amp;&amp; ${incidenceModel>CreationDate} !== undefined }"
 				>
-					<Text id="idReasonText" text="{i18n>incidenceReason}"/>
+					<Label id="idReasonLabel" text="{i18n>incidenceReason}" required="true"/>
 					<Input id="idReasonInput" value="{incidenceModel>Reason}" change="onReasonInputChange"/>
 				</VBox>
 
