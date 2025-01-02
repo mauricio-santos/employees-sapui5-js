@@ -160,6 +160,7 @@ sap.ui.define([
                         const fragId = 'fragID' + Date.now();
                         dataUpdated.forEach((incidence, index) => {
                             incidence.validateDate = true;
+                            incidence.enabledSave = false;
                             
                             Fragment.load({
                                 name: "logaligroup.employees.fragments.NewIncidence",

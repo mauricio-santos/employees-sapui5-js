@@ -15,7 +15,7 @@
 					text="{i18n>incidenceTitle} {= ${incidenceModel>IncidenceId} ? parseInt(${incidenceModel>IncidenceId}) : ''}  {path:'incidenceModel>CreationDate', formatter:'.Formatter.dateFormat'}"
 				/>
 				<ToolbarSpacer id="idStatusToolbarSpacer"/>
-				<Button id="idSaveButton" icon="sap-icon://save" press="onSaveButtonPress"/>
+				<Button id="idSaveButton" icon="sap-icon://save" press="onSaveButtonPress" enabled="{= ${incidenceModel>enabledSave} === true}"/>
 				<core:Icon id="idDeleteIcon" src="sap-icon://delete" press="onIconDeletePress"/>
 			</Toolbar>
 		</headerToolbar>

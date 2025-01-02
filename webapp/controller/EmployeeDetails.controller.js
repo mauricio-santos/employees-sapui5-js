@@ -2,16 +2,14 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/Fragment",
     "logaligroup/employees/model/formatter",
-    "sap/m/MessageBox",
-    "sap/ui/core/TextDirection"
+    "sap/m/MessageBox"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller 
      * @param {typeof sap.ui.core.Fragment} Fragment 
      * @param {typeof sap.m.MessageBox} MessageBox 
-     * @param {typeof sap.ui.core.TextDirection} TextDirection 
      */
-    function (Controller, Fragment, formatter, MessageBox, TextDirection) {
+    function (Controller, Fragment, formatter, MessageBox) {
         "use strict";
 
         function onInit() {
@@ -28,7 +26,8 @@ sap.ui.define([
             //Adicionando index da incidencia no oData
             oData.push({
                 index: oDataLength + 1,
-                validateDate: false
+                validateDate: false,
+                enabledSave: false
             });
 
             //Atualizando o modelo
@@ -84,13 +83,15 @@ sap.ui.define([
                     actions: MessageBox.Action.CLOSE,
                     emphasizedAction: null,
                     initial: null,
-                    textDirection: TextDirection.Inherit
+                    textDirection: sap.ui.core.TextDirection.Inherit
                 });
             }else{
                 oContext.CreationDateX = true;
                 oContext.validateDate = true;
                 oContext.CreationDateState = "None";
             }
+
+            (isValidDate && oContext.CreationDate && oContext.Reason) ? oContext.enabledSave = true : oContext.enabledSave = false;
 
             //Atualizando o modelo com os novos valores
             bindingContext.getModel().refresh()
@@ -108,6 +109,8 @@ sap.ui.define([
                 oContext.ReasonX = true;
                 oContext.CreationReasonState = "None";
             }
+
+            (isValue && oContext.validateDate) ? oContext.enabledSave = true : oContext.enabledSave = false;
         
             //Atualizando o modelo com os novos valores
             bindingContext.getModel().refresh()
@@ -117,6 +120,11 @@ sap.ui.define([
             const bindingContext = event.getSource().getBindingContext("incidenceModel");
             const oContext = bindingContext.getObject();
             oContext.TypeX = true;
+
+            (oContext.validateDate && oContext.Reason) ? oContext.enabledSave = true : oContext.enabledSave = false;
+
+            //Atualizando o modelo com os novos valores
+            bindingContext.getModel().refresh()
 
         };
 
