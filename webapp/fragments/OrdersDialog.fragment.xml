@@ -4,7 +4,7 @@
 >
     <Dialog id="idOrdersDialog" title="{i18n>orders}">
         <content>
-            <Table id="idOrdersTable" items="{employeesModel>Orders}" width="700px">
+            <Table id="idOrdersTable" items="{northwindModel>Orders}" width="700px">
                 <columns>
                     <Column id="idOrderIDColumn">
                         <header>
@@ -28,9 +28,9 @@
                 <items>
                     <ColumnListItem id="idOrdersColumnListItem">
                         <cells>
-                            <Label id="idOrderIDItemLabel" text="{employeesModel>OrderID}"/>
-                            <Label id="idFreightItemLabel" text="{employeesModel>Freight}"/>
-                            <Label id="idShipAddressEtemLabel" text="{employeesModel>ShipAddress}"/>
+                            <Label id="idOrderIDItemLabel" text="{northwindModel>OrderID}"/>
+                            <Label id="idFreightItemLabel" text="{northwindModel>Freight}"/>
+                            <Label id="idShipAddressEtemLabel" text="{northwindModel>ShipAddress}"/>
                         </cells>
                     </ColumnListItem>
                 </items>

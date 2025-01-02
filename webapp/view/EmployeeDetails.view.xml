@@ -11,7 +11,7 @@
 
 			<FlexBox id="idCenterFlexBox" height="65px" alignItems="Center" justifyContent="Center" >
 				<items>
-					<Text id="idNameText" class="boldText" text="{employeesModel>LastName}, {employeesModel>FirstName}"/>
+					<Text id="idNameText" class="boldText" text="{northwindModel>TitleOfCourtesy} {northwindModel>LastName}, {northwindModel>FirstName}"/>
 				</items>
 			</FlexBox>
 
@@ -19,13 +19,13 @@
 				<items>
 					<VBox id="idEmployeeIdVBox">
 						<Text id="idEmployeeIDLabelText" class="boldText sapUiTinyMarginEnd" text="{i18n>employeeId}"/>
-						<Text id="idEmployeeIDText" class="boldText" text="{employeesModel>EmployeeID}"/>
+						<Text id="idEmployeeIDText" class="boldText" text="{northwindModel>EmployeeID}"/>
 					</VBox>
 
 					<VBox id="idEmployeeTitleVBox">
 						<items>
 							<Text id="idTitleEmployeeLabelText" text="{i18n>titleEmployee}" class="boldText"/>
-							<Text id="idTitleEmployeeText" text="{employeesModel>Title}" class="boldText"/>
+							<Text id="idTitleEmployeeText" text="{northwindModel>Title}" class="boldText"/>
 						</items>
 					</VBox>
 				</items>
@@ -35,7 +35,7 @@
 				<items>
 					<HBox id="idCountryHBox">
 						<Text id="idCountryCodeText" class="boldText sapUiTinyMarginEnd" text="{i18n>countryCode}"/>
-						<Text id="idCountryText" text="{employeesModel>Country}"/>
+						<Text id="idCountryText" text="{northwindModel>Country}"/>
 						<layoutData>
 							<FlexItemData id="idCountryFlexItemData" growFactor="3"/>
 						</layoutData>
@@ -43,7 +43,7 @@
 
 					<HBox id="idCityHBox">
 						<Text id="idCityLabelText" class="boldText sapUiTinyMarginEnd" text="{i18n>city}"/>
-						<Text id="idCityText" text="{employeesModel>City}"/>
+						<Text id="idCityText" text="{northwindModel>City}"/>
 						<layoutData>
 							<FlexItemData id="idCityFlexItemData" growFactor="2"/>
 						</layoutData>
@@ -51,7 +51,7 @@
 					
 					<FlexBox id="idPostalCodeFlexBox">
 						<Text id="idPostalCodeLabelText" class="boldText sapUiTinyMarginEnd" text="{i18n>postalCode}"/>
-						<Text id="idPostalCodeText" text="{employeesModel>PostalCode}"/>
+						<Text id="idPostalCodeText" text="{northwindModel>PostalCode}"/>
 						<layoutData>
 							<FlexItemData id="idPostalFlexItemData" growFactor="1"/>
 						</layoutData>
@@ -63,7 +63,7 @@
 		<Panel id="idIncidencesPanel" class="sapUiSizeCompact" backgroundDesign="Transparent">
 			<headerToolbar>
 				<Toolbar id="idIncidencesToolbar">
-					<Title id="idIncidenceTitle" text="{i18n>incidenceTitle} {= ${employeesModel>Country} !== 'US' ? ${i18n>europe} : ${i18n>nothAmerica}}"/>
+					<Title id="idIncidenceTitle" text="{i18n>incidenceTitle} {= ${northwindModel>Country} !== 'USA' ? ${i18n>europe} : ${i18n>nothAmerica}}"/>
 					<ToolbarSpacer id="idToolbarSpacer"/>
 					<Button id="idCreateIncidenceButton" text="{i18n>createIncidence}" press="onCreateIncidenceButtonPress"/>
 				</Toolbar>

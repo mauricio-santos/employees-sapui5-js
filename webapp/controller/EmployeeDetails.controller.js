@@ -11,7 +11,7 @@ sap.ui.define([
         "use strict";
 
         function onInit() {
-
+            
         };
 
         function onCreateIncidenceButtonPress() {
@@ -37,48 +37,60 @@ sap.ui.define([
             }).then(function (frag) {
                 frag.bindElement({
                     model: "incidenceModel",
-                    path: "incidenceModel>/" + oDataLength
+                    path: "/" + oDataLength
                 });
                 tableIncidence.addContent(frag);
             })
         };
 
         function onIconDeletePress(event) {                     
-            const incidenceModel = this.getView().getModel("incidenceModel");
-            let oData = incidenceModel.getData();
-            let fragmentInstance = event.getSource().getParent().getParent(); // O avô do evento
+            const oBindingContext = event.getSource().getBindingContext("incidenceModel");
+            const oContext = oBindingContext.getObject();
+
+            const oEventBus = sap.ui.getCore().getEventBus();
+            oEventBus.publish("IncidenceChanel", "DeleteIncidence", oContext);
+        };
+
+        function onSaveButtonPress(event) {
+            const fragmentInstance = event.getSource().getParent().getParent(); // O avô do evento
             const oBindingContext = fragmentInstance.getBindingContext("incidenceModel");
-            const tableIncidence = this.getView().byId("idTableIncidencePanel");
-            const contextObj = oBindingContext.getObject()
+            const incidenceIndex = oBindingContext.sPath.replace("/", '');
+            
+            //Instanciando o EventBus
+            const oEventBus = sap.ui.getCore().getEventBus();
+            //Publicando evento
+            oEventBus.publish("IncidenceChanel", "SelectedIncidenceIndex", {index: incidenceIndex});
+        };
 
-            //Removendo elemento do modelo
-            oData.splice(contextObj.index - 1, 1);
-        
-            // Reordenando os índices do modelo
-            oData.forEach((oIncidence, i) => {
-                oIncidence.index = i + 1;          
-            });
+        function onDatePickerChange(event) {
+            const bindingContext = event.getSource().getBindingContext("incidenceModel");
+            const oContext = bindingContext.getObject();
+            oContext.CreationDateX = true;
+            
+        };
 
-            //Atualizando o modelo
-            incidenceModel.refresh();
+        function onReasonInputChange(event) {
+            const bindingContext = event.getSource().getBindingContext("incidenceModel");
+            const oContext = bindingContext.getObject();
+            oContext.ReasonX = true;
+        };
 
-            //Removendo o conteúdo da view
-            tableIncidence.removeContent(fragmentInstance);
+        function onSelectTypeChange(event) {
+            const bindingContext = event.getSource().getBindingContext("incidenceModel");
+            const oContext = bindingContext.getObject();
+            oContext.TypeX = true;
 
-            // Destruindo o fragmento para liberar memória
-            fragmentInstance.destroy();
-           
-            // Realizando o binding na tabela
-            tableIncidence.getContent().forEach((row, index) => {
-                row.bindElement("incidenceModel>/" + index)
-            });  
-        }
+        };
 
         const EmployeeDetails = Controller.extend("logaligroup.employees.controller.EmployeeDetails", {});
         EmployeeDetails.prototype.onInit = onInit;
         EmployeeDetails.prototype.onCreateIncidenceButtonPress = onCreateIncidenceButtonPress;
         EmployeeDetails.prototype.Formatter = formatter;
         EmployeeDetails.prototype.onIconDeletePress = onIconDeletePress;
+        EmployeeDetails.prototype.onSaveButtonPress = onSaveButtonPress;
+        EmployeeDetails.prototype.onDatePickerChange = onDatePickerChange;
+        EmployeeDetails.prototype.onReasonInputChange = onReasonInputChange;
+        EmployeeDetails.prototype.onSelectTypeChange = onSelectTypeChange;
         return EmployeeDetails;
     }
 );
