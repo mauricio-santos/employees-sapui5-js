@@ -52,8 +52,11 @@ sap.ui.define([
                 //inscrevendo-se ao Canal EmployeeChanel do evento EmployeeSelected
                 oEventBus.subscribe("EmployeeChanel", "SelectedEmployee", this.employeeSelected, this);
 
-                //inscrevendo-se ao Canal EmployeeChanel do evento EmployeeSelected
+                //inscrevendo-se ao Canal IncidenceChanel do evento SelectedIncidenceIndex
                 oEventBus.subscribe("IncidenceChanel", "SelectedIncidenceIndex", this.createIncidence, this)
+
+                //inscrevendo-se ao Canal IncidenceChanel do evento DeleteIncidence
+                oEventBus.subscribe("IncidenceChanel", "DeleteIncidence", this.deleteIncidence, this)
             },
 
             employeeSelected: function (sChanel, sEvent, oData) {
@@ -134,9 +137,7 @@ sap.ui.define([
 
             readIncidences: function (employeeID) {
                 const oModel = this.getView().getModel("incidenceModel");
-                const configModel = this.getView().getModel("configModel");
                 const sapID = this.getOwnerComponent().SapId;
-                let dataUpdated;
                 
                 // READ
                 oModel.read("/IncidentsSet", {
@@ -148,7 +149,7 @@ sap.ui.define([
 
                         //Atualizado o modelo
                         const incidenceModel = this._employeeDetailsView.getModel("incidenceModel");
-                        dataUpdated = incidentsSetResult.results;
+                        const dataUpdated = incidentsSetResult.results;
                         incidenceModel.setData(dataUpdated);
 
                         //Removendo todo o conteúdo da tabela
@@ -187,6 +188,24 @@ sap.ui.define([
                     error: function (e) {
                         console.log(e);
                     }
+                });
+            },
+
+            deleteIncidence: function (sChanel, sEvent, oData) {
+                const oModel = this.getView().getModel("incidenceModel");
+                const oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
+                
+                const sPath = `/IncidentsSet(IncidenceId='${oData.IncidenceId}',SapId='${oData.SapId}',EmployeeId='${oData.EmployeeId}')`;
+
+                oModel.remove(sPath, {
+                    success: function () {
+                        this.readIncidences.bind(this)(oData.EmployeeId)               
+                        sap.m.MessageToast.show(oResourceBundle.getText("oDataDeleteOK", [oData.IncidenceId]));
+                    }.bind(this),
+                    error: function (e) {
+                        sap.m.MessageToast.show(oResourceBundle.getText("oDataDeleteERROR"));
+                        console.warn(e);
+                    }.bind(this)
                 });
             }
         });

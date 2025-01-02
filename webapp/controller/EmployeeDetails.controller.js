@@ -44,34 +44,11 @@ sap.ui.define([
         };
 
         function onIconDeletePress(event) {                     
-            const incidenceModel = this.getView().getModel("incidenceModel");
-            let oData = incidenceModel.getData();
-            let fragmentInstance = event.getSource().getParent().getParent(); // O avô do evento
-            const oBindingContext = fragmentInstance.getBindingContext("incidenceModel");
-            const tableIncidence = this.getView().byId("idTableIncidencePanel");
-            const contextObj = oBindingContext.getObject()
+            const oBindingContext = event.getSource().getBindingContext("incidenceModel");
+            const oContext = oBindingContext.getObject();
 
-            //Removendo elemento do modelo
-            oData.splice(contextObj.index - 1, 1);
-        
-            // Reordenando os índices do modelo
-            oData.forEach((oIncidence, i) => {
-                oIncidence.index = i + 1;          
-            });
-
-            //Atualizando o modelo
-            incidenceModel.refresh();
-
-            //Removendo o conteúdo da view
-            tableIncidence.removeContent(fragmentInstance);
-
-            // Destruindo o fragmento para liberar memória
-            fragmentInstance.destroy();
-           
-            // Realizando o binding na tabela
-            tableIncidence.getContent().forEach((row, index) => {
-                row.bindElement("incidenceModel>/" + index)
-            });  
+            const oEventBus = sap.ui.getCore().getEventBus();
+            oEventBus.publish("IncidenceChanel", "DeleteIncidence", oContext);
         };
 
         function onSaveButtonPress(event) {
