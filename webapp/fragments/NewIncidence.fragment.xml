@@ -12,7 +12,7 @@
 						}" 
 				/>
 				<Title id="idStatusTitle" 
-					text="{i18n>incidenceTitle} {incidenceModel>IncidenceId} {path:'incidenceModel>CreationDate', formatter:'.Formatter.dateFormat'}"
+					text="{i18n>incidenceTitle} {= ${incidenceModel>IncidenceId} ? parseInt(${incidenceModel>IncidenceId}) : ''}  {path:'incidenceModel>CreationDate', formatter:'.Formatter.dateFormat'}"
 				/>
 				<ToolbarSpacer id="idStatusToolbarSpacer"/>
 				<Button id="idSaveButton" icon="sap-icon://save" press="onSaveButtonPress"/>

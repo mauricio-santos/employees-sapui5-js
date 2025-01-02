@@ -37,7 +37,7 @@ sap.ui.define([
             }).then(function (frag) {
                 frag.bindElement({
                     model: "incidenceModel",
-                    path: "incidenceModel>/" + oDataLength
+                    path: "/" + oDataLength
                 });
                 tableIncidence.addContent(frag);
             })
