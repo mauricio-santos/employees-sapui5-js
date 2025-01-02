@@ -79,11 +79,13 @@ sap.ui.define([
                 const oIncidence = aIncidencesModel[oData.index];
                 const oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
                 const employeeID = this._employeeDetailsView.getBindingContext("northwindModel").getObject().EmployeeID.toString()
+                const sapId = this.getOwnerComponent().SapId
+                const oModel = this.getView().getModel("incidenceModel");
 
                 if (oIncidence.IncidenceId == undefined) {
                     // ###### CREATE ######
                     const body = {
-                        SapId: this.getOwnerComponent().SapId,
+                        SapId: sapId,
                         EmployeeId: employeeID,
                         CreationDate: oIncidence.CreationDate,
                         Type: oIncidence.Type,
@@ -91,7 +93,7 @@ sap.ui.define([
                     }
 
                     //save on SAP
-                    this.getView().getModel("incidenceModel").create("/IncidentsSet", body, {
+                    oModel.create("/IncidentsSet", body, {
                         success: function () {
                             this.readIncidences.bind(this)(employeeID)
                             sap.m.MessageToast.show(oResourceBundle.getText("oDataOK"))
@@ -101,9 +103,32 @@ sap.ui.define([
                             console.warn(e);
                         }.bind(this)
                     })
+
                     
+                    // ###### UPDATE ######
+                } else if (oIncidence.CreationDateX || oIncidence.ReasonX || oIncidence.TypeX){
+                    const body = {
+                        CreationDate: oIncidence.CreationDate,
+                        CreationDateX: oIncidence.CreationDateX,
+                        Type: oIncidence.Type,
+                        TypeX: oIncidence.TypeX,
+                        Reason: oIncidence.Reason,
+                        ReasonX: oIncidence.ReasonX
+                    };
+
+                    const sPath = `/IncidentsSet(IncidenceId='${oIncidence.IncidenceId}',SapId='${oIncidence.SapId}',EmployeeId='${oIncidence.EmployeeId}')`;
+                    oModel.update(sPath, body, {
+                        success: function() {
+                            this.readIncidences.bind(this)(employeeID)
+                            sap.m.MessageToast.show(oResourceBundle.getText("oDataUpdateOK"));
+                        }.bind(this),
+                        error: function (e) {
+                            sap.m.MessageToast.show(oResourceBundle.getText("oDataUpdateERROR"));
+                            console.warn(e);
+                        }.bind(this)
+                    })
                 }else {
-                    sap.m.MessageToast.show(oResourceBundle.getText("oDataNoChanges"))
+                    sap.m.MessageToast.show(oResourceBundle.getText("oDataNoChanges"));
                 }
             },
 

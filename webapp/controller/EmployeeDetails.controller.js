@@ -83,7 +83,27 @@ sap.ui.define([
             const oEventBus = sap.ui.getCore().getEventBus();
             //Publicando evento
             oEventBus.publish("IncidenceChanel", "SelectedIncidenceIndex", {index: incidenceIndex});
-        }
+        };
+
+        function onDatePickerChange(event) {
+            const bindingContext = event.getSource().getBindingContext("incidenceModel");
+            const oContext = bindingContext.getObject();
+            oContext.CreationDateX = true;
+            
+        };
+
+        function onReasonInputChange(event) {
+            const bindingContext = event.getSource().getBindingContext("incidenceModel");
+            const oContext = bindingContext.getObject();
+            oContext.ReasonX = true;
+        };
+
+        function onSelectTypeChange(event) {
+            const bindingContext = event.getSource().getBindingContext("incidenceModel");
+            const oContext = bindingContext.getObject();
+            oContext.TypeX = true;
+
+        };
 
         const EmployeeDetails = Controller.extend("logaligroup.employees.controller.EmployeeDetails", {});
         EmployeeDetails.prototype.onInit = onInit;
@@ -91,6 +111,9 @@ sap.ui.define([
         EmployeeDetails.prototype.Formatter = formatter;
         EmployeeDetails.prototype.onIconDeletePress = onIconDeletePress;
         EmployeeDetails.prototype.onSaveButtonPress = onSaveButtonPress;
+        EmployeeDetails.prototype.onDatePickerChange = onDatePickerChange;
+        EmployeeDetails.prototype.onReasonInputChange = onReasonInputChange;
+        EmployeeDetails.prototype.onSelectTypeChange = onSelectTypeChange;
         return EmployeeDetails;
     }
 );

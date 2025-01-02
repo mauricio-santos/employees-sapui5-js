@@ -23,21 +23,21 @@
 			<HBox id="idHBox">
 				<VBox id="idDateVBox" class="sapUiSmallMarginEnd">
 					<Text id="idDateText" text="{i18n>incidanceDate}"/>
-					<DatePicker id="idDateDatePicker" dateValue="{incidenceModel>CreationDate}"/>
+					<DatePicker id="idDateDatePicker" dateValue="{incidenceModel>CreationDate}" change="onDatePickerChange"/>
 				</VBox>
 
 				<VBox id="idReasonVBox" class="sapUiSmallMarginEnd" 
 					visible="{= ${incidenceModel>CreationDate} !== '' &amp;&amp; ${incidenceModel>CreationDate} !== undefined }"
 				>
 					<Text id="idReasonText" text="{i18n>incidenceReason}"/>
-					<Input id="idReasonInput" value="{incidenceModel>Reason}"/>
+					<Input id="idReasonInput" value="{incidenceModel>Reason}" change="onReasonInputChange"/>
 				</VBox>
 
 				<VBox id="idStatusVBox" 
 					visible="{= ${incidenceModel>CreationDate} !== '' &amp;&amp; ${incidenceModel>CreationDate} !== undefined }"
 				>
 					<Text id="idTypeText" text="{i18n>incidenceType}"/> 
-					<Select id="idStatusSelect" selectedKey="{incidenceModel>Type}" forceSelection="false">
+					<Select id="idStatusSelect" selectedKey="{incidenceModel>Type}" forceSelection="false" change="onSelectTypeChange">
 						<core:Item id="idCorrectItem" key="0" text="{i18n>incidenceCorrect}"/>
 						<core:Item id="idPendingItem" key="1" text="{i18n>incidencePending}"/>
 						<core:Item id="idErrorItem" key="2" text="{i18n>incidenceError}"/>
