@@ -15,22 +15,22 @@
 					text="{i18n>incidenceTitle} {= ${incidenceModel>IncidenceId} ? parseInt(${incidenceModel>IncidenceId}) : ''}  {path:'incidenceModel>CreationDate', formatter:'.Formatter.dateFormat'}"
 				/>
 				<ToolbarSpacer id="idStatusToolbarSpacer"/>
-				<Button id="idSaveButton" icon="sap-icon://save" press="onSaveButtonPress"/>
+				<Button id="idSaveButton" icon="sap-icon://save" press="onSaveButtonPress" enabled="{= ${incidenceModel>enabledSave} === true}"/>
 				<core:Icon id="idDeleteIcon" src="sap-icon://delete" press="onIconDeletePress"/>
 			</Toolbar>
 		</headerToolbar>
 		<content>
 			<HBox id="idHBox">
 				<VBox id="idDateVBox" class="sapUiSmallMarginEnd">
-					<Text id="idDateText" text="{i18n>incidanceDate}"/>
-					<DatePicker id="idDateDatePicker" dateValue="{incidenceModel>CreationDate}" change="onDatePickerChange"/>
+					<Label id="idDateLabel" text="{i18n>incidanceDate}" required="true"/>
+					<DatePicker id="idDateDatePicker" dateValue="{incidenceModel>CreationDate}" change="onDatePickerChange" valueState="{incidenceModel>CreationDateState}"/>
 				</VBox>
 
 				<VBox id="idReasonVBox" class="sapUiSmallMarginEnd" 
 					visible="{= ${incidenceModel>CreationDate} !== '' &amp;&amp; ${incidenceModel>CreationDate} !== undefined }"
 				>
-					<Text id="idReasonText" text="{i18n>incidenceReason}"/>
-					<Input id="idReasonInput" value="{incidenceModel>Reason}" change="onReasonInputChange"/>
+					<Label id="idReasonLabel" text="{i18n>incidenceReason}" required="true"/>
+					<Input id="idReasonInput" value="{incidenceModel>Reason}" change="onReasonInputChange" valueState="{incidenceModel>CreationReasonState}"/>
 				</VBox>
 
 				<VBox id="idStatusVBox" 

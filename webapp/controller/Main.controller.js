@@ -4,7 +4,7 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/ui/core/Fragment",
-    "sap/ui/core/BusyIndicator"
+    "sap/m/MessageBox"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller 
@@ -12,8 +12,9 @@ sap.ui.define([
      * @param {typeof sap.ui.model.Filter} Filter 
      * @param {typeof sap.ui.model.FilterOperator} FilterOperator 
      * @param {typeof sap.ui.core.Fragment} Fragment 
+     * @param {typeof sap.m.MessageBox} MessageBox 
      */
-    function (Controller, JSONModel, Filter, FilterOperator, Fragment) {
+    function (Controller, JSONModel, Filter, FilterOperator, Fragment, MessageBox) {
         "use strict";
 
         return Controller.extend("logaligroup.employees.controller.Main", {
@@ -99,10 +100,13 @@ sap.ui.define([
                     oModel.create("/IncidentsSet", body, {
                         success: function () {
                             this.readIncidences.bind(this)(employeeID)
-                            sap.m.MessageToast.show(oResourceBundle.getText("oDataOK"))
+                            // sap.m.MessageToast.show(oResourceBundle.getText("oDataOK"))
+                            MessageBox.success(oResourceBundle.getText("oDataOK"));
                         }.bind(this),
                         error: function (e) {
-                            sap.m.MessageToast.show(oResourceBundle.getText("oDataERROR"))
+                            
+                            // sap.m.MessageToast.show(oResourceBundle.getText("oDataERROR"))
+                            MessageBox.error(oResourceBundle.getText("oDataERROR"));
                             console.warn(e);
                         }.bind(this)
                     })
@@ -159,6 +163,9 @@ sap.ui.define([
                         //Iterando fragmento
                         const fragId = 'fragID' + Date.now();
                         dataUpdated.forEach((incidence, index) => {
+                            incidence.validateDate = true;
+                            incidence.enabledSave = false;
+                            
                             Fragment.load({
                                 name: "logaligroup.employees.fragments.NewIncidence",
                                 id: fragId + index,
@@ -200,7 +207,7 @@ sap.ui.define([
                 oModel.remove(sPath, {
                     success: function () {
                         this.readIncidences.bind(this)(oData.EmployeeId)               
-                        sap.m.MessageToast.show(oResourceBundle.getText("oDataDeleteOK", [oData.IncidenceId]));
+                        sap.m.MessageToast.show(oResourceBundle.getText("oDataDeleteOK", [parseInt(oData.IncidenceId)]));
                     }.bind(this),
                     error: function (e) {
                         sap.m.MessageToast.show(oResourceBundle.getText("oDataDeleteERROR"));

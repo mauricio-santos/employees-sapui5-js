@@ -1,13 +1,15 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/Fragment",
-    "logaligroup/employees/model/formatter"
+    "logaligroup/employees/model/formatter",
+    "sap/m/MessageBox"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller 
      * @param {typeof sap.ui.core.Fragment} Fragment 
+     * @param {typeof sap.m.MessageBox} MessageBox 
      */
-    function (Controller, Fragment, formatter) {
+    function (Controller, Fragment, formatter, MessageBox) {
         "use strict";
 
         function onInit() {
@@ -24,6 +26,8 @@ sap.ui.define([
             //Adicionando index da incidencia no oData
             oData.push({
                 index: oDataLength + 1,
+                validateDate: false,
+                enabledSave: false
             });
 
             //Atualizando o modelo
@@ -46,9 +50,20 @@ sap.ui.define([
         function onIconDeletePress(event) {                     
             const oBindingContext = event.getSource().getBindingContext("incidenceModel");
             const oContext = oBindingContext.getObject();
+            const resourceBundle = this.getView().getModel("i18n").getResourceBundle();
 
-            const oEventBus = sap.ui.getCore().getEventBus();
-            oEventBus.publish("IncidenceChanel", "DeleteIncidence", oContext);
+            MessageBox.confirm(resourceBundle.getText("confirmDeleteIncidence", [parseInt(oContext.IncidenceId)]), {
+                onClose: function (oAction) {
+                    console.log(oAction);
+                    
+                    if (oAction === "OK") {
+                        console.log("----OK");
+                        
+                        const oEventBus = sap.ui.getCore().getEventBus();
+                        oEventBus.publish("IncidenceChanel", "DeleteIncidence", oContext);
+                    }
+                }.bind(this)
+            });
         };
 
         function onSaveButtonPress(event) {
@@ -65,20 +80,62 @@ sap.ui.define([
         function onDatePickerChange(event) {
             const bindingContext = event.getSource().getBindingContext("incidenceModel");
             const oContext = bindingContext.getObject();
-            oContext.CreationDateX = true;
+            const isValidDate = event.getSource().isValidValue() //A função isValidDate é do controle DataPicker
+            const resourceBundle = this.getView().getModel("i18n").getResourceBundle();
+            
+            if (!isValidDate){
+                oContext.validateDate = false;
+                oContext.CreationDateState = "Error";
+
+                MessageBox.error(resourceBundle.getText("errorCreationDateValue"), {
+                    title: "Error",
+                    onclose: null,
+                    styleClass: null,
+                    actions: MessageBox.Action.CLOSE,
+                    emphasizedAction: null,
+                    initial: null,
+                    textDirection: sap.ui.core.TextDirection.Inherit
+                });
+            }else{
+                oContext.CreationDateX = true;
+                oContext.validateDate = true;
+                oContext.CreationDateState = "None";
+            }
+
+            (isValidDate && oContext.CreationDate && oContext.Reason) ? oContext.enabledSave = true : oContext.enabledSave = false;
+
+            //Atualizando o modelo com os novos valores
+            bindingContext.getModel().refresh()
             
         };
 
         function onReasonInputChange(event) {
             const bindingContext = event.getSource().getBindingContext("incidenceModel");
             const oContext = bindingContext.getObject();
-            oContext.ReasonX = true;
+            const isValue = event.getSource().getValue()
+            
+            if (!isValue) {
+                oContext.CreationReasonState = "Error";
+            } else {
+                oContext.ReasonX = true;
+                oContext.CreationReasonState = "None";
+            }
+
+            (isValue && oContext.validateDate) ? oContext.enabledSave = true : oContext.enabledSave = false;
+        
+            //Atualizando o modelo com os novos valores
+            bindingContext.getModel().refresh()
         };
 
         function onSelectTypeChange(event) {
             const bindingContext = event.getSource().getBindingContext("incidenceModel");
             const oContext = bindingContext.getObject();
             oContext.TypeX = true;
+
+            (oContext.validateDate && oContext.Reason) ? oContext.enabledSave = true : oContext.enabledSave = false;
+
+            //Atualizando o modelo com os novos valores
+            bindingContext.getModel().refresh()
 
         };
 
