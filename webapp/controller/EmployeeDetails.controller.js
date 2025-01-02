@@ -50,9 +50,20 @@ sap.ui.define([
         function onIconDeletePress(event) {                     
             const oBindingContext = event.getSource().getBindingContext("incidenceModel");
             const oContext = oBindingContext.getObject();
+            const resourceBundle = this.getView().getModel("i18n").getResourceBundle();
 
-            const oEventBus = sap.ui.getCore().getEventBus();
-            oEventBus.publish("IncidenceChanel", "DeleteIncidence", oContext);
+            MessageBox.confirm(resourceBundle.getText("confirmDeleteIncidence", [parseInt(oContext.IncidenceId)]), {
+                onClose: function (oAction) {
+                    console.log(oAction);
+                    
+                    if (oAction === "OK") {
+                        console.log("----OK");
+                        
+                        const oEventBus = sap.ui.getCore().getEventBus();
+                        oEventBus.publish("IncidenceChanel", "DeleteIncidence", oContext);
+                    }
+                }.bind(this)
+            });
         };
 
         function onSaveButtonPress(event) {

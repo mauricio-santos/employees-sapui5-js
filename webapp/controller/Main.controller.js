@@ -203,7 +203,7 @@ sap.ui.define([
                 oModel.remove(sPath, {
                     success: function () {
                         this.readIncidences.bind(this)(oData.EmployeeId)               
-                        sap.m.MessageToast.show(oResourceBundle.getText("oDataDeleteOK", [oData.IncidenceId]));
+                        sap.m.MessageToast.show(oResourceBundle.getText("oDataDeleteOK", [parseInt(oData.IncidenceId)]));
                     }.bind(this),
                     error: function (e) {
                         sap.m.MessageToast.show(oResourceBundle.getText("oDataDeleteERROR"));
