@@ -1,13 +1,17 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/Fragment",
-    "logaligroup/employees/model/formatter"
+    "logaligroup/employees/model/formatter",
+    "sap/m/MessageBox",
+    "sap/ui/core/TextDirection"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller 
      * @param {typeof sap.ui.core.Fragment} Fragment 
+     * @param {typeof sap.m.MessageBox} MessageBox 
+     * @param {typeof sap.ui.core.TextDirection} TextDirection 
      */
-    function (Controller, Fragment, formatter) {
+    function (Controller, Fragment, formatter, MessageBox, TextDirection) {
         "use strict";
 
         function onInit() {
@@ -64,14 +68,24 @@ sap.ui.define([
         };
 
         function onDatePickerChange(event) {
-            let bindingContext = event.getSource().getBindingContext("incidenceModel");
-            let oContext = bindingContext.getObject();
-            
+            const bindingContext = event.getSource().getBindingContext("incidenceModel");
+            const oContext = bindingContext.getObject();
             const isValidDate = event.getSource().isValidValue() //A função isValidDate é do controle DataPicker
+            const resourceBundle = this.getView().getModel("i18n").getResourceBundle();
             
             if (!isValidDate){
                 oContext.validateDate = false;
                 oContext.CreationDateState = "Error";
+
+                MessageBox.error(resourceBundle.getText("errorCreationDateValue"), {
+                    title: "Error",
+                    onclose: null,
+                    styleClass: null,
+                    actions: MessageBox.Action.CLOSE,
+                    emphasizedAction: null,
+                    initial: null,
+                    textDirection: TextDirection.Inherit
+                });
             }else{
                 oContext.CreationDateX = true;
                 oContext.validateDate = true;
@@ -84,9 +98,8 @@ sap.ui.define([
         };
 
         function onReasonInputChange(event) {
-            let bindingContext = event.getSource().getBindingContext("incidenceModel");
-            let oContext = bindingContext.getObject();
-            
+            const bindingContext = event.getSource().getBindingContext("incidenceModel");
+            const oContext = bindingContext.getObject();
             const isValue = event.getSource().getValue()
             
             if (!isValue) {
