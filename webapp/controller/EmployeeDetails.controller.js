@@ -24,6 +24,7 @@ sap.ui.define([
             //Adicionando index da incidencia no oData
             oData.push({
                 index: oDataLength + 1,
+                validateDate: false
             });
 
             //Atualizando o modelo
@@ -63,16 +64,40 @@ sap.ui.define([
         };
 
         function onDatePickerChange(event) {
-            const bindingContext = event.getSource().getBindingContext("incidenceModel");
-            const oContext = bindingContext.getObject();
-            oContext.CreationDateX = true;
+            let bindingContext = event.getSource().getBindingContext("incidenceModel");
+            let oContext = bindingContext.getObject();
+            
+            const isValidDate = event.getSource().isValidValue() //A função isValidDate é do controle DataPicker
+            
+            if (!isValidDate){
+                oContext.validateDate = false;
+                oContext.CreationDateState = "Error";
+            }else{
+                oContext.CreationDateX = true;
+                oContext.validateDate = true;
+                oContext.CreationDateState = "None";
+            }
+
+            //Atualizando o modelo com os novos valores
+            bindingContext.getModel().refresh()
             
         };
 
         function onReasonInputChange(event) {
-            const bindingContext = event.getSource().getBindingContext("incidenceModel");
-            const oContext = bindingContext.getObject();
-            oContext.ReasonX = true;
+            let bindingContext = event.getSource().getBindingContext("incidenceModel");
+            let oContext = bindingContext.getObject();
+            
+            const isValue = event.getSource().getValue()
+            
+            if (!isValue) {
+                oContext.CreationReasonState = "Error";
+            } else {
+                oContext.ReasonX = true;
+                oContext.CreationReasonState = "None";
+            }
+        
+            //Atualizando o modelo com os novos valores
+            bindingContext.getModel().refresh()
         };
 
         function onSelectTypeChange(event) {
