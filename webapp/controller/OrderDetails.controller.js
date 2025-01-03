@@ -8,7 +8,6 @@ sap.ui.define([
  * @param {typeof sap.ui.core.mvc.Controller} Controller 
  * @param {typeof sap.ui.core.routing.History} History 
  * @param {typeof sap.ui.core.UIComponent} UIComponent 
- * @returns 
  */
     function (Controller, History, UIComponent) {
     "use strict";
@@ -39,6 +38,11 @@ sap.ui.define([
                 const oRouter = UIComponent.getRouterFor(this);
                 oRouter.navTo("RouteMainView");
             }
+        },
+
+        onClearSignatureButtonPress: function(event) {
+            const signature = this.byId("idSignature");
+            signature.clear()
         }
     });
 });
