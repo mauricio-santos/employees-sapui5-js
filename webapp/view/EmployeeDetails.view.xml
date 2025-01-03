@@ -71,6 +71,11 @@
 
 			<Panel id="idTableIncidencePanel" class="sapUiNoContentPadding" backgroundDesign="Transparent"/>
 			
+			<Panel id="idOrdersTablePanel" class="sapUiSizeCompact sapUiSmallMarginTop" backgroundDesign="Transparent" headerText="{i18n>orders}">
+				<core:Fragment id="idOrdersTableDetailsFragment" fragmentName="logaligroup.employees.fragments.TableOrders" type="XML"/>
+			</Panel>
+
+			
 		</Panel>
 	</Page>
 </mvc:View>

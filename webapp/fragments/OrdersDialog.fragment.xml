@@ -4,7 +4,7 @@
 >
     <Dialog id="idOrdersDialog" title="{i18n>orders}">
         <content>
-
+            <core:Fragment id="idOrdersTableDialogFragment" fragmentName="logaligroup.employees.fragments.TableOrders" type="XML"/>
         </content>
 
         <endButton>

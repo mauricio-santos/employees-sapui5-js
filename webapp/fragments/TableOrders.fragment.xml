@@ -2,7 +2,7 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
 >
-<Table id="idOrdersFragmentTable" items="{northwindModel>Orders}" width="700px">
+<Table id="idOrdersFragmentTable" items="{northwindModel>Orders}">
     <columns>
         <Column id="idOrderIDFragColumn">
             <header>
