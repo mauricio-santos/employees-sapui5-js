@@ -13,7 +13,21 @@ sap.ui.define([
     function (Controller, History, UIComponent) {
     "use strict";
 
+        function _onObjectMatched(event) {
+            const orderID = event.getParameter("arguments").orderID;
+            this.getView().bindElement({
+                path: `/Orders(${orderID})`,
+                model: "northwindModel"
+            })
+        }
+
     return Controller.extend("logaligroup.employees.controller.OrderDetails", {
+
+        onInit: function() {          
+            const oRouter = UIComponent.getRouterFor(this);
+            oRouter.getRoute("RouteOrderDetails").attachPatternMatched(_onObjectMatched, this);
+
+        },
 
         onButtonBackPress: function(event) {
             const oHistory = History.getInstance();
