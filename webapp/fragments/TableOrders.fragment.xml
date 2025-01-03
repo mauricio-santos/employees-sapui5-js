@@ -24,7 +24,7 @@
     </columns>
 
     <items>
-        <ColumnListItem id="idOrdersFragColumnListItem">
+        <ColumnListItem id="idOrdersFragColumnListItem" type="Navigation" press="onColumnListItemOrderPress">
             <cells>
                 <Label id="idOrderIDItemFragLabel" text="{northwindModel>OrderID}"/>
                 <Label id="idFreightItemFragLabel" text="{northwindModel>Freight}"/>

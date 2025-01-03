@@ -2,15 +2,17 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/ui/core/Fragment"
+    "sap/ui/core/Fragment",
+    "sap/ui/core/UIComponent"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller 
      * @param {typeof sap.ui.model.Filter} Filter 
      * @param {typeof sap.ui.model.FilterOperator} FilterOperator 
      * @param {typeof sap.ui.core.Fragment} Fragment 
+     * @param {typeof sap.ui.core.UIComponent} UIComponent 
      */
-    function (Controller, Filter, FilterOperator, Fragment) {
+    function (Controller, Filter, FilterOperator, Fragment, UIComponent) {
         "use strict";
 
         function onInit() {
@@ -98,7 +100,13 @@ sap.ui.define([
             const oEventBus = sap.ui.getCore().getEventBus();
             //Publicando evento SelectedEmployee no canal EmployeeChanel e enviando oContext como parâmetro
             oEventBus.publish("EmployeeChanel", "SelectedEmployee", oContext);
-        }
+        };
+
+        function onColumnListItemOrderPress(event) {            
+            const orderID = event.getSource().getBindingContext("northwindModel").getObject().OrderID;
+            const oRouter = UIComponent.getRouterFor(this);
+            oRouter.navTo("RouteOrderDetails", {orderID})
+        };
 
         const Main = Controller.extend("logaligroup.employees.controller.EmployeeMaster", {});
         Main.prototype.onInit = onInit;
@@ -109,6 +117,7 @@ sap.ui.define([
         Main.prototype.showOrders = showOrders;
         Main.prototype.onCloseDialogButtonPress = onCloseDialogButtonPress;
         Main.prototype.onColumnListItemPress = onColumnListItemPress;
+        Main.prototype.onColumnListItemOrderPress = onColumnListItemOrderPress;
         return Main;
 	}
 );
