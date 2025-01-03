@@ -116,7 +116,7 @@
             "routes": [
                 {
                     "name": "RouteMainView",
-                    "pattern": "?home",
+                    "pattern": "",
                     "target": [
                         "TargetMain"
                     ]
@@ -140,7 +140,7 @@
             }
         },
         "rootView": {
-            "viewName": "logaligroup.employees.view.Main",
+            "viewName": "logaligroup.employees.view.App",
             "type": "XML",
             "async": true,
             "id": "App"
