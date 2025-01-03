@@ -4,8 +4,17 @@
     xmlns:core="sap.ui.core" 
     displayBlock="true"
 >
-<Page id="idOrdersPanel">
-    <Text id="idOrderDetailsText" text="Order Details"/>
+<Page id="idOrdersPage">
+    <customHeader>
+        <Bar id="idBackBar">
+            <contentLeft>
+                <Button id="idBackButton" icon="sap-icon://nav-back" press="onButtonBackPress"/>
+            </contentLeft>
+            <contentMiddle>
+                <Text id="idOrderDetailsText" text="Order Details"/>
+            </contentMiddle>
+        </Bar>
+    </customHeader>
 </Page>
 
 </mvc:View>
