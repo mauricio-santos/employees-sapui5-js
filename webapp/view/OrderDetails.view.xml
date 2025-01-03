@@ -1,0 +1,67 @@
+<mvc:View controllerName="logaligroup.employees.controller.OrderDetails"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    displayBlock="true"
+>
+<Page id="idOrdersPage">
+    <customHeader>
+        <Bar id="idBackBar">
+            <contentLeft>
+                <Button id="idBackButton" icon="sap-icon://nav-back" press="onButtonBackPress"/>
+            </contentLeft>
+            <contentMiddle>
+                <Text id="idOrderDetailsText" text="{i18n>orderID} {northwindModel>OrderID}"/>
+            </contentMiddle>
+        </Bar>
+    </customHeader>
+
+    <Panel id="idOrderDetailsPanel" headerText="{i18n>customerID}: {northwindModel>CustomerID}">
+        <layout:Grid id="idGrid" defaultSpan="L6 M6 S12">
+            <form:Form id="idForm">
+                <form:layout>
+                    <form:ResponsiveGridLayout id="idResponsiveGridLayout" labelSpanL="6" labelSpanM="6"/>
+                </form:layout>
+
+                <form:formContainers>
+                    <form:FormContainer id="idFormContainer">
+                        <form:formElements>
+                            <form:FormElement id="idDateFormElement" label="{i18n>orderDate}">
+                                <form:fields>
+                                    <Text id="idOrderDateText" text="{path:'northwindModel>OrderDate', type:'sap.ui.model.odata.type.Date'}"/>
+                                </form:fields>
+                            </form:FormElement>
+
+                            <form:FormElement id="idFreightFormElement" label="{i18n>freight}">
+                                <form:fields>
+                                    <Text id="idFreightText" text="{northwindModel>Freight}"/>
+                                </form:fields>
+                            </form:FormElement>
+
+                            <form:FormElement id="idShipNameFormElement" label="{i18n>shipName}">
+                                <form:fields>
+                                    <Text id="idShipNameText" text="{northwindModel>ShipName}"/>
+                                </form:fields>
+                            </form:FormElement>
+
+                            <form:FormElement id="idShipAddressFormElement" label="{i18n>shipAddress}">
+                                <form:fields>
+                                    <VBox id="idAddressVBox" class="sapUiNoContentPadding">
+                                        <items>
+                                            <Text id="idShipAddressText" text="{northwindModel>ShipAddress}"/>
+                                            <Text id="idShipCodeText" text="{northwindModel>ShipPostalCode} {northwindModel>ShipCity}"/>
+                                            <Text id="idShipCountryText" text=" {northwindModel>ShipCountry}"/>
+                                        </items>
+                                    </VBox>
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                    </form:FormContainer>    
+                </form:formContainers>
+            </form:Form>
+        </layout:Grid>
+    </Panel>
+</Page>
+
+</mvc:View>

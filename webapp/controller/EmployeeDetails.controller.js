@@ -2,14 +2,16 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/Fragment",
     "logaligroup/employees/model/formatter",
-    "sap/m/MessageBox"
+    "sap/m/MessageBox",
+    "sap/ui/core/UIComponent"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller 
      * @param {typeof sap.ui.core.Fragment} Fragment 
      * @param {typeof sap.m.MessageBox} MessageBox 
+     * @param {typeof sap.ui.core.UIComponent} UIComponent 
      */
-    function (Controller, Fragment, formatter, MessageBox) {
+    function (Controller, Fragment, formatter, MessageBox, UIComponent) {
         "use strict";
 
         function onInit() {
@@ -139,6 +141,12 @@ sap.ui.define([
 
         };
 
+        function onColumnListItemOrderPress(event) {
+            const orderID = event.getSource().getBindingContext("northwindModel").getObject().OrderID;
+            const oRouter = UIComponent.getRouterFor(this);
+            oRouter.navTo("RouteOrderDetails", { orderID })
+        };
+
         const EmployeeDetails = Controller.extend("logaligroup.employees.controller.EmployeeDetails", {});
         EmployeeDetails.prototype.onInit = onInit;
         EmployeeDetails.prototype.onCreateIncidenceButtonPress = onCreateIncidenceButtonPress;
@@ -148,6 +156,7 @@ sap.ui.define([
         EmployeeDetails.prototype.onDatePickerChange = onDatePickerChange;
         EmployeeDetails.prototype.onReasonInputChange = onReasonInputChange;
         EmployeeDetails.prototype.onSelectTypeChange = onSelectTypeChange;
+        EmployeeDetails.prototype.onColumnListItemOrderPress = onColumnListItemOrderPress;
         return EmployeeDetails;
     }
 );
