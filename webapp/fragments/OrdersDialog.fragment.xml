@@ -4,37 +4,7 @@
 >
     <Dialog id="idOrdersDialog" title="{i18n>orders}">
         <content>
-            <Table id="idOrdersTable" items="{northwindModel>Orders}" width="700px">
-                <columns>
-                    <Column id="idOrderIDColumn">
-                        <header>
-                            <Label id="idOrderIDLabel" text="{i18n>orderID}"/>
-                        </header>
-                    </Column>
 
-                    <Column id="idFreightColumn">
-                        <header>
-                            <Label id="idFreightLabel" text="{i18n>freight}"/>
-                        </header>
-                    </Column>
-
-                    <Column id="idShipAddressColumn">
-                        <header>
-                            <Label id="idShipAddressLabel" text="{i18n>shipAddress}"/>
-                        </header>
-                    </Column>
-                </columns>
-
-                <items>
-                    <ColumnListItem id="idOrdersColumnListItem">
-                        <cells>
-                            <Label id="idOrderIDItemLabel" text="{northwindModel>OrderID}"/>
-                            <Label id="idFreightItemLabel" text="{northwindModel>Freight}"/>
-                            <Label id="idShipAddressEtemLabel" text="{northwindModel>ShipAddress}"/>
-                        </cells>
-                    </ColumnListItem>
-                </items>
-            </Table>
         </content>
 
         <endButton>

@@ -1,0 +1,37 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+<Table id="idOrdersFragmentTable" items="{northwindModel>Orders}" width="700px">
+    <columns>
+        <Column id="idOrderIDFragColumn">
+            <header>
+                <Label id="idOrderIDFragLabel" text="{i18n>orderID}"/>
+            </header>
+        </Column>
+
+        <Column id="idFreightFragColumn">
+            <header>
+                <Label id="idFreightFragLabel" text="{i18n>freight}"/>
+            </header>
+        </Column>
+
+        <Column id="idShipAddressFragColumn">
+            <header>
+                <Label id="idShipAddressFragLabel" text="{i18n>shipAddress}"/>
+            </header>
+        </Column>
+    </columns>
+
+    <items>
+        <ColumnListItem id="idOrdersFragColumnListItem">
+            <cells>
+                <Label id="idOrderIDItemFragLabel" text="{northwindModel>OrderID}"/>
+                <Label id="idFreightItemFragLabel" text="{northwindModel>Freight}"/>
+                <Label id="idShipAddressFrag2Label" text="{northwindModel>ShipAddress}"/>
+            </cells>
+        </ColumnListItem>
+    </items>
+</Table>
+
+</core:FragmentDefinition>
