@@ -3,6 +3,7 @@
     xmlns="sap.m"
     xmlns:layout="sap.ui.layout"
     xmlns:form="sap.ui.layout.form"
+    xmlns:custControl="logaligroup.employees.control"
     displayBlock="true"
 >
 <Page id="idOrdersPage">
@@ -60,6 +61,13 @@
                     </form:FormContainer>    
                 </form:formContainers>
             </form:Form>
+
+            <!-- Signature -->
+            <FlexBox id="idSignatureFlexBox" class="sapUiTinyMarginTop">
+                <custControl:Signature id="idSignature"/>
+                <Button id="idClearSignatureButton" class="sapUiTinyMarginBegin" text="{i18n>clear}" press="onClearSignatureButtonPress"/>
+            </FlexBox>
+
         </layout:Grid>
     </Panel>
 </Page>
