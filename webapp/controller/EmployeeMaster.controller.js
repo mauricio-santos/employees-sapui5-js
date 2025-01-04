@@ -1,18 +1,16 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "logaligroup/employees/controller/Base.controller",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/ui/core/Fragment",
-    "sap/ui/core/UIComponent"
+    "sap/ui/core/Fragment"
 ],
     /**
-     * @param {typeof sap.ui.core.mvc.Controller} Controller 
      * @param {typeof sap.ui.model.Filter} Filter 
      * @param {typeof sap.ui.model.FilterOperator} FilterOperator 
      * @param {typeof sap.ui.core.Fragment} Fragment 
      * @param {typeof sap.ui.core.UIComponent} UIComponent 
      */
-    function (Controller, Filter, FilterOperator, Fragment, UIComponent) {
+    function (Base, Filter, FilterOperator, Fragment) {
         "use strict";
 
         function onInit() {
@@ -102,13 +100,7 @@ sap.ui.define([
             oEventBus.publish("EmployeeChanel", "SelectedEmployee", oContext);
         };
 
-        function onColumnListItemOrderPress(event) {            
-            const orderID = event.getSource().getBindingContext("northwindModel").getObject().OrderID;
-            const oRouter = UIComponent.getRouterFor(this);
-            oRouter.navTo("RouteOrderDetails", {orderID})
-        };
-
-        const Main = Controller.extend("logaligroup.employees.controller.EmployeeMaster", {});
+        const Main = Base.extend("logaligroup.employees.controller.EmployeeMaster", {});
         Main.prototype.onInit = onInit;
         Main.prototype.onFilterButtonPress = onFilterButtonPress;
         Main.prototype.onClearFilterButtonPress = onClearFilterButtonPress;
@@ -117,7 +109,6 @@ sap.ui.define([
         Main.prototype.showOrders = showOrders;
         Main.prototype.onCloseDialogButtonPress = onCloseDialogButtonPress;
         Main.prototype.onColumnListItemPress = onColumnListItemPress;
-        Main.prototype.onColumnListItemOrderPress = onColumnListItemOrderPress;
         return Main;
 	}
 );
