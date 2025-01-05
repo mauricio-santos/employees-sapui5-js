@@ -8,7 +8,6 @@ sap.ui.define([
      * @param {typeof sap.ui.model.Filter} Filter 
      * @param {typeof sap.ui.model.FilterOperator} FilterOperator 
      * @param {typeof sap.ui.core.Fragment} Fragment 
-     * @param {typeof sap.ui.core.UIComponent} UIComponent 
      */
     function (Base, Filter, FilterOperator, Fragment) {
         "use strict";

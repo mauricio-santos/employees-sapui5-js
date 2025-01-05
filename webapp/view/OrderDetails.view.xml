@@ -70,6 +70,16 @@
 
         </layout:Grid>
     </Panel>
+
+    <Panel id="idOrderProductsPanel" headerText="{i18n>orderProducts}">
+        <List id="idOrderDetailsList" 
+            items="{
+                path: 'northwindModel>Order_Details',
+                parameters: {expand: 'Product'},
+                factory: '.factoryOrderDetails'
+            }"
+        />
+    </Panel>
 </Page>
 
 </mvc:View>
