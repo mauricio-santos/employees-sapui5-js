@@ -80,6 +80,13 @@
             }"
         />
     </Panel>
+
+    <footer>
+        <Toolbar id="idSignatureToolbar">
+            <ToolbarSpacer id="idSignatureToolbarSpacer"/>
+            <Button id="idSaveSignatureButton" text="{i18n>saveSignature}" press="onSaveSignatureButtonPress"/>
+        </Toolbar>
+    </footer>
 </Page>
 
 </mvc:View>

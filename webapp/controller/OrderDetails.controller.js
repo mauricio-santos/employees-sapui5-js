@@ -6,7 +6,8 @@ sap.ui.define([
     "sap/m/CustomListItem",
     "sap/m/Label",
     "sap/m/Bar",
-    "sap/m/ObjectStatus"
+    "sap/m/ObjectStatus",
+    "sap/m/MessageBox"
 ], 
 /**
  * 
@@ -18,8 +19,9 @@ sap.ui.define([
  * @param {typeof sap.m.Label} Label 
  * @param {typeof sap.m.Bar} Bar 
  * @param {typeof sap.m.ObjectStatus} ObjectStatus 
+ * @param {typeof sap.m.MessageBox} MessageBox 
  */
-    function (Controller, History, UIComponent, ObjectListItem, CustomListItem, Label, Bar, ObjectStatus) {
+    function (Controller, History, UIComponent, ObjectListItem, CustomListItem, Label, Bar, ObjectStatus, MessageBox) {
     "use strict";
 
         function _onObjectMatched(event) {
@@ -78,6 +80,38 @@ sap.ui.define([
                     ]
                 });
             }
+        },
+
+        onSaveSignatureButtonPress: function(event) {
+            const signature = this.byId("idSignature");
+            const oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
+
+            if (!signature.isFill()) {
+                MessageBox.error(oResourceBundle.getText("fillSignature"));
+            }else {
+                const oModel = this.getView().getModel("incidenceModel");
+                const oOrder = event.getSource().getBindingContext("northwindModel").getObject();
+                const base64 = signature.getSignature().replace("data:image/png;base64,", '');
+                
+                const body = {
+                    OrderId: oOrder.OrderID.toString(),
+                    SapId: this.getOwnerComponent().SapId,
+                    EmployeeId: oOrder.EmployeeID.toString(),
+                    MimeType: "image/png",
+                    MediaContent: base64
+                };
+
+                oModel.create("/SignatureSet", body, {
+                    success: function() {
+                        MessageBox.information(oResourceBundle.getText("signatureSaved"));
+                    },
+                    error: function(e) {
+                        MessageBox.error(oResourceBundle.getText("signatureNotSaved") + "\n\n" + e.message);
+                    }
+                });
+            }
+
+            
         }
     });
 });
