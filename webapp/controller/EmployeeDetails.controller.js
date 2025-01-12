@@ -52,12 +52,8 @@ sap.ui.define([
             const resourceBundle = this.getView().getModel("i18n").getResourceBundle();
 
             MessageBox.confirm(resourceBundle.getText("confirmDeleteIncidence", [parseInt(oContext.IncidenceId)]), {
-                onClose: function (oAction) {
-                    console.log(oAction);
-                    
-                    if (oAction === "OK") {
-                        console.log("----OK");
-                        
+                onClose: function (oAction) {                  
+                    if (oAction === "OK") {                       
                         const oEventBus = sap.ui.getCore().getEventBus();
                         oEventBus.publish("IncidenceChanel", "DeleteIncidence", oContext);
                     }
