@@ -66,8 +66,8 @@ sap.ui.define([
 				return this.signaturePad.toDataURL(); //devolve a imagem em PNG
 			},
 
-			setSignature: function(signaturePNG) {
-				this.signaturePad.fronDataURL(signaturePNG);
+			setSignature: function(signatureBase64) {
+				this.signaturePad.fromDataURL(signatureBase64);
 			}
 		});
 	});

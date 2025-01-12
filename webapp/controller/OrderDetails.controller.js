@@ -10,7 +10,6 @@ sap.ui.define([
     "sap/m/MessageBox"
 ], 
 /**
- * 
  * @param {typeof sap.ui.core.mvc.Controller} Controller 
  * @param {typeof sap.ui.core.routing.History} History 
  * @param {typeof sap.ui.core.UIComponent} UIComponent 
@@ -26,11 +25,52 @@ sap.ui.define([
 
         function _onObjectMatched(event) {
             const orderID = event.getParameter("arguments").orderID;
+            const path = `/Orders(${orderID})`;
+            const model = this.getView().getModel("northwindModel");
+            const oContext = model.getContext(path);
+            
+            //Remove previus signature
+            this.onClearSignatureButtonPress();
+                        
+            //Binding model and read signature
             this.getView().bindElement({
-                path: `/Orders(${orderID})`,
-                model: "northwindModel"
-            })
-        }
+                path,
+                model: "northwindModel",
+                events: { 
+                    //READ Signature - Access direct from OrderDetails. Model will be loaded. 
+                    dataReceived: function (oData) {
+                        // READ Signature
+                        const oOrder = oData.getParameters().data;
+                        oOrder.SapId = this.getOwnerComponent().SapId;
+                        _readSignature.bind(this)(oOrder);
+                    }.bind(this)
+                }
+            });
+
+            //READ Signature - access from EmployeeDetails. Model is loaded.
+            const oOrder = oContext.getObject();
+            if (oOrder) {     
+                oOrder.SapId = this.getOwnerComponent().SapId;
+                _readSignature.bind(this)(oOrder);
+            }
+            
+        };
+
+        function _readSignature(oOrder) {
+            const oModel = this.getView().getModel("incidenceModel");
+            const sQuery = `/SignatureSet(OrderId='${oOrder.OrderID}',SapId='${oOrder.SapId}',EmployeeId='${oOrder.EmployeeID}')`;
+ 
+            oModel.read(sQuery, {
+                success: function (data) {
+                    const base64 = "data:image/png;base64," + data.MediaContent;
+                    const signature = this.getView().byId("idSignature");
+                    base64 && signature.setSignature(base64);
+                }.bind(this),
+                error: function (e) {
+                    console.warn(e.message);
+                }
+            });
+        };
 
     return Controller.extend("logaligroup.employees.controller.OrderDetails", {
 
