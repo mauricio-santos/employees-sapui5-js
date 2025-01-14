@@ -23,7 +23,7 @@
       "outputCapture": "std",
       "env": {
         "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/employees\"}",
-        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/V2\",\"destination\":\"Northwind\"},{\"path\":\"/sap\",\"destination\":\"logaligroupERP\",\"authenticationType\":\"BasicAuthentication\"}]",
+        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/V2\",\"destination\":\"Northwind\"},{\"path\":\"/sap\",\"destination\":\"logaligroupERP\"}]",
         "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false"
       }
     }

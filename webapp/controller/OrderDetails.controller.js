@@ -7,7 +7,9 @@ sap.ui.define([
     "sap/m/Label",
     "sap/m/Bar",
     "sap/m/ObjectStatus",
-    "sap/m/MessageBox"
+    "sap/m/MessageBox",
+    "sap/ui/core/Item",
+	"sap/f/Card"
 ], 
 /**
  * @param {typeof sap.ui.core.mvc.Controller} Controller 
@@ -19,8 +21,9 @@ sap.ui.define([
  * @param {typeof sap.m.Bar} Bar 
  * @param {typeof sap.m.ObjectStatus} ObjectStatus 
  * @param {typeof sap.m.MessageBox} MessageBox 
+ * @param {typeof sap.ui.core.Item} Item 
  */
-    function (Controller, History, UIComponent, ObjectListItem, CustomListItem, Label, Bar, ObjectStatus, MessageBox) {
+    function (Controller, History, UIComponent,	ObjectListItem,	CustomListItem,	Label, Bar, ObjectStatus, MessageBox, Item) {
     "use strict";
 
         function _onObjectMatched(event) {
@@ -93,8 +96,12 @@ sap.ui.define([
         },
 
         onClearSignatureButtonPress: function(event) {
-            const signature = this.byId("idSignature");
-            signature.clear()
+            try {
+                const signature = this.byId("idSignature");
+                signature.clear()
+            }catch (e) {
+                console.log(e);
+            }
         },
 
         factoryOrderDetails: function(listId, oContext) {
@@ -149,9 +156,54 @@ sap.ui.define([
                         MessageBox.error(oResourceBundle.getText("signatureNotSaved") + "\n\n" + e.message);
                     }
                 });
-            }
+            } 
+        },
 
-            
+        onUploadSetAfterItemAdded: function (event) {
+            const oItem = event.getParameter("item");
+            const csrfToken = this.getView().getModel("incidenceModel").getSecurityToken();
+
+            const oCsrfHeader = new Item({
+                key: "x-csrf-token",
+                text: csrfToken
+            });
+
+            // Add header to upload item
+            oItem.addHeaderField(oCsrfHeader);
+        },
+
+        onUploadSetBeforeUploadStarts: function (event) {
+            //Get the item from upload
+            const oItem = event.getParameter("item");
+            const fileName = oItem.getFileName();
+
+            // Get the context and values ​​for the slug
+            const oContext = event.getSource().getBindingContext("northwindModel");
+            const oOrder = oContext.getObject();
+            const sapId = this.getOwnerComponent().SapId;
+
+            // Build slug value
+            const sSlug = `${oOrder.OrderID};${sapId};${oOrder.EmployeeID};${fileName}`;
+            const encodedSlugValue = encodeURIComponent(sSlug);
+
+            // Create the custom header parameter
+            const oHeaderFieldSlug = new Item({
+                key: "slug",
+                text: encodedSlugValue
+            });
+
+            // Add header to upload item
+            oItem.addHeaderField(oHeaderFieldSlug);
+
+            // console.log("Headers added to item:", oItem.getHeaderFields());
+        },
+
+        onUploadSetUploadCompleted: function(event) {
+
+        },
+
+        onUploadSetAfterItemRemoved: function(event) {
+
         }
     });
 });

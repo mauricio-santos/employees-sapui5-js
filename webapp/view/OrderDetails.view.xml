@@ -4,6 +4,7 @@
     xmlns:layout="sap.ui.layout"
     xmlns:form="sap.ui.layout.form"
     xmlns:custControl="logaligroup.employees.control"
+    xmlns:upload="sap.m.upload"
     displayBlock="true"
 >
 <Page id="idOrdersPage">
@@ -69,6 +70,17 @@
             </FlexBox>
 
         </layout:Grid>
+
+        <upload:UploadSet id="idItemsUploadSet" 
+            maxFileNameLength="55" 
+            maxFileSize="10" 
+            uploadUrl="/sap/opu/odata/sap/YSAPUI5_SRV_01/FilesSet"
+            afterItemAdded="onUploadSetAfterItemAdded"
+            beforeUploadStarts="onUploadSetBeforeUploadStarts" 
+            uploadCompleted="onUploadSetUploadCompleted" 
+            afterItemRemoved="onUploadSetAfterItemRemoved" 
+        />
+
     </Panel>
 
     <Panel id="idOrderProductsPanel" headerText="{i18n>orderProducts}">
