@@ -9,7 +9,9 @@ sap.ui.define([
     "sap/m/ObjectStatus",
     "sap/m/MessageBox",
     "sap/ui/core/Item",
-	"sap/f/Card"
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+    "sap/m/upload/UploadSetItem"
 ], 
 /**
  * @param {typeof sap.ui.core.mvc.Controller} Controller 
@@ -22,8 +24,11 @@ sap.ui.define([
  * @param {typeof sap.m.ObjectStatus} ObjectStatus 
  * @param {typeof sap.m.MessageBox} MessageBox 
  * @param {typeof sap.ui.core.Item} Item 
+ * @param {typeof sap.ui.model.Filter} Filter 
+ * @param {typeof sap.ui.model.FilterOperator} FilterOperator 
+ * @param {typeof sap.m.upload.UploadSetItem} UploadSetItem 
  */
-    function (Controller, History, UIComponent,	ObjectListItem,	CustomListItem,	Label, Bar, ObjectStatus, MessageBox, Item) {
+    function (Controller, History, UIComponent, ObjectListItem, CustomListItem, Label, Bar, ObjectStatus, MessageBox, Item, Filter, FilterOperator, UploadSetItem) {
     "use strict";
 
         function _onObjectMatched(event) {
@@ -45,7 +50,7 @@ sap.ui.define([
                         // READ Signature
                         const oOrder = oData.getParameters().data;
                         oOrder.SapId = this.getOwnerComponent().SapId;
-                        _readSignature.bind(this)(oOrder);
+                        _readDependences.bind(this)(oOrder);
                     }.bind(this)
                 }
             });
@@ -54,12 +59,13 @@ sap.ui.define([
             const oOrder = oContext.getObject();
             if (oOrder) {     
                 oOrder.SapId = this.getOwnerComponent().SapId;
-                _readSignature.bind(this)(oOrder);
+                _readDependences.bind(this)(oOrder);
             }
             
         };
 
-        function _readSignature(oOrder) {
+        function _readDependences(oOrder) {
+            // ### READ SIGNATURE IMAGE ###
             const oModel = this.getView().getModel("incidenceModel");
             const sQuery = `/SignatureSet(OrderId='${oOrder.OrderID}',SapId='${oOrder.SapId}',EmployeeId='${oOrder.EmployeeID}')`;
  
@@ -73,6 +79,32 @@ sap.ui.define([
                     console.warn(e.message);
                 }
             });
+
+            // ### READ UPLOAD FILES ###
+            //Bind Files using UploadSet
+            const oBindingInfo = {
+                path: "incidenceModel>/FilesSet",
+                filters: [
+                    new Filter("OrderId", FilterOperator.EQ, oOrder.OrderID),
+                    new Filter("SapId", FilterOperator.EQ, oOrder.SapId),
+                    new Filter("EmployeeId", FilterOperator.EQ, oOrder.EmployeeID),
+                ],
+                template: new UploadSetItem("", {
+                    fileName: "{incidenceModel>FileName}",
+                    visibleEdit: true,
+                    url: { //Download URL
+                        path: "incidenceModel>__metadata/media_src", // Full URL for media_src
+                        formatter: function (sMediaSrc) {
+                            // Removes the hostname and returns only the relative part
+                            const sRelativePath = sMediaSrc.replace(/^https?:\/\/[^/]+/, "");
+                            return sRelativePath;
+                        }
+                    }
+                })
+            };
+
+            const oUploadSet = this.byId("idItemsUploadSet");
+            oUploadSet.bindAggregation("items", oBindingInfo); //Binding to the UploadSet control
         };
 
     return Controller.extend("logaligroup.employees.controller.OrderDetails", {
