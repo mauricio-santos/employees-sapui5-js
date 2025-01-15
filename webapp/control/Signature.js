@@ -47,7 +47,8 @@ sap.ui.define([
 				try{
 					const canvas = document.querySelector("canvas");
 					this.signaturePad = new SignaturePad(canvas);
-
+					this.signaturePad.fill = false;
+					canvas.addEventListener("mousedown", () => this.signaturePad.fill = true);
 				}catch(e) {
 					console.log(e);
 				}
@@ -55,6 +56,18 @@ sap.ui.define([
 
 			clear: function() {
 				this.signaturePad.clear();
+			},
+
+			isFill: function() {
+				return this.signaturePad.fill;
+			},
+
+			getSignature: function() {
+				return this.signaturePad.toDataURL(); //devolve a imagem em PNG
+			},
+
+			setSignature: function(signatureBase64) {
+				this.signaturePad.fromDataURL(signatureBase64);
 			}
 		});
 	});
