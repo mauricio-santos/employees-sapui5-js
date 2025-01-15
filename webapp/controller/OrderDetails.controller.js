@@ -231,7 +231,7 @@ sap.ui.define([
         },
 
         onUploadSetUploadCompleted: function(event) {
-
+            event.getSource().getBinding("items").refresh(); //Now the file is ready for download
         },
 
         onUploadSetAfterItemRemoved: function(event) {
