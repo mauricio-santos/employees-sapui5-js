@@ -91,7 +91,7 @@ sap.ui.define([
                 ],
                 template: new UploadSetItem("", {
                     fileName: "{incidenceModel>FileName}",
-                    visibleEdit: true,
+                    visibleEdit: false,
                     url: { //Download URL
                         path: "incidenceModel>__metadata/media_src", // Full URL for media_src
                         formatter: function (sMediaSrc) {
@@ -235,7 +235,19 @@ sap.ui.define([
         },
 
         onUploadSetAfterItemRemoved: function(event) {
+            const oContext = event.getParameter("item").getBindingContext("incidenceModel");
+            const path = oContext.getPath();
+            const oModel = oContext.getModel();
 
+            oModel.remove(path, {
+                success: function() {
+
+                },
+                error: function(e) {
+                    console.log(e.message);
+                }
+            })
+            
         }
     });
 });
