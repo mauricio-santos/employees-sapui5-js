@@ -27,11 +27,11 @@ sap.ui.define([
                 const oView = this.getView();
 
                 const employeesModel = new JSONModel();
-                employeesModel.loadData("./localService/mockdata/Employees.json");
+                employeesModel.loadData("./model/json/Employees.json");
                 oView.setModel(employeesModel, "employeesModel");
 
                 const countriesModel = new JSONModel();
-                countriesModel.loadData("./localService/mockdata/Countries.json");
+                countriesModel.loadData("./model/json/Countries.json");
                 oView.setModel(countriesModel, "countriesModel");
 
                 const configModel = new JSONModel({
@@ -45,7 +45,7 @@ sap.ui.define([
                 oView.setModel(configModel, "configModel");
 
                 const layoutModel = new JSONModel();
-                layoutModel.loadData("./localService/mockdata/Layout.json");
+                layoutModel.loadData("./model/json/Layout.json");
                 oView.setModel(layoutModel, "layoutModel");
 
                 //Obtendo o Event Bus
